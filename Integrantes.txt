@@ -1,4 +1,4 @@
-Integrantes (Equipo Naranja): 
+﻿Integrantes (Equipo Naranja): 
 -----------
 
 Milton Landriel,
@@ -6,3 +6,5 @@ Milton Landriel,
 Sebastián Flores, 
 
 Pablo Alejandro Silva Franco,
+
+Daniel Alejandro Riba,
