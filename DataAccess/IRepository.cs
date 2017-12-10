@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-
     interface IRepository<T> where T : class
     {
-        List<T> GetAll();
+        IQueryable<T> GetAll();
         List<T> GetAll(List<Expression<Func<T, object>>> includes);
 
         T Single(Expression<Func<T, bool>> predicate);

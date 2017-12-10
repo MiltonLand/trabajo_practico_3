@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-
     public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
-
-        public List<T> GetAll()
+        public IQueryable<T> GetAll()
         {
             using (DataModel context = new DataModel())
             {
-                return (List<T>)context.Set<T>().ToList();
+                return context.Set<T>();
             }
         }
 
@@ -40,11 +38,10 @@ namespace DataAccess
 
                 includelist.ForEach(x => query = query.Include(x));
 
-                return (List<T>)query.ToList();
+                return query.ToList();
             }
 
         }
-
 
         public T Single(Expression<Func<T, bool>> predicate)
         {
@@ -61,8 +58,7 @@ namespace DataAccess
                 return context.Set<T>().Any(predicate);
             }
         }
-
-
+        
         public T Single(Expression<Func<T, bool>> predicate, List<Expression<Func<T, object>>> includes)
         {
             List<string> includelist = new List<string>();
@@ -85,7 +81,6 @@ namespace DataAccess
                 return query.FirstOrDefault(predicate);
             }
         }
-
 
         public List<T> Filter(Expression<Func<T, bool>> predicate)
         {
@@ -117,8 +112,7 @@ namespace DataAccess
                 return (List<T>)query.Where(predicate).ToList();
             }
         }
-
-
+        
         public void Create(T entity)
         {
             using (DataModel context = new DataModel())

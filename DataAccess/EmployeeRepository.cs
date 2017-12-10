@@ -10,8 +10,6 @@ namespace DataAccess
 {
     public class EmployeeRepository : BaseRepository<Employees>
     {
-
-
         public List<Employees> GetEmployeesInclude()
         {
             using (DataModel context = new DataModel())
@@ -20,8 +18,7 @@ namespace DataAccess
                 return list.ToList();
             }
         }
-
-
+        
         public Employees FindID(int? id)
         {
             using (DataModel context = new DataModel())
@@ -30,6 +27,5 @@ namespace DataAccess
 
             }
         }
-
     }
 }

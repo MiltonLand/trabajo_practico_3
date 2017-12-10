@@ -8,7 +8,6 @@ namespace Entities
 
     public partial class Turns
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Turns()
         {
             Employees = new HashSet<Employees>();
@@ -25,7 +24,6 @@ namespace Entities
 
         public TimeSpan TimeOut { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees> Employees { get; set; }
     }
 }
