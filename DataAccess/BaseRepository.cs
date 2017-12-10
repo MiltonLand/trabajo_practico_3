@@ -11,11 +11,11 @@ namespace DataAccess
 {
     public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
-        public IQueryable<T> GetAll()
+        public List<T> GetAll()
         {
             using (DataModel context = new DataModel())
             {
-                return context.Set<T>();
+                return context.Set<T>().ToList();
             }
         }
 

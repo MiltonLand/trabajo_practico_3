@@ -10,15 +10,18 @@ namespace DataAccess
 {
     public class EmployeeRepository : BaseRepository<Employees>
     {
+
+
         public List<Employees> GetEmployeesInclude()
         {
             using (DataModel context = new DataModel())
             {
-                var list = context.Employees.Include(e => e.Country).Include(e => e.Turns);
-                return list.ToList();
+                var list = context.Employees.Include(e => e.Country).Include(e => e.Turns).ToList();
+                return list;
             }
         }
-        
+
+
         public Employees FindID(int? id)
         {
             using (DataModel context = new DataModel())
@@ -27,5 +30,6 @@ namespace DataAccess
 
             }
         }
+
     }
 }

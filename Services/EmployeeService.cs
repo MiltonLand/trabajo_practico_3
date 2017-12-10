@@ -23,5 +23,11 @@ namespace Services
            
         }
 
+        public static void Add(Employees employee)
+        {
+            var EmployeeRep = new EmployeeRepository();
+            EmployeeRep.Create(employee);
+
+        }
     }
 }

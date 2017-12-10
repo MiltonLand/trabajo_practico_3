@@ -52,11 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="CountryRepository.cs" />
     <Compile Include="DataModel.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="TurnRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

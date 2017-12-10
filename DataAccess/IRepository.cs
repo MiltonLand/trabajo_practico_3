@@ -9,7 +9,7 @@ namespace DataAccess
 {
     interface IRepository<T> where T : class
     {
-        IQueryable<T> GetAll();
+        List<T> GetAll();
         List<T> GetAll(List<Expression<Func<T, object>>> includes);
 
         T Single(Expression<Func<T, bool>> predicate);
