@@ -29,5 +29,19 @@ namespace Services
             EmployeeRep.Create(employee);
 
         }
+
+        public static void Update(Employees employee)
+        {
+            var EmployeeRep = new EmployeeRepository();
+            EmployeeRep.Update(employee);
+
+        }
+
+        public static void Remove(Employees employee)
+        {
+            var EmployeeRep = new EmployeeRepository();
+            EmployeeRep.Delete(employee);
+
+        }
     }
 }

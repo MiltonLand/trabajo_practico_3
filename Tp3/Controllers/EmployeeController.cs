@@ -55,6 +55,64 @@ namespace Tp3.Controllers
             }
             return View(employee);
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employees employee = EmployeeService.FindID(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.CountryID = new SelectList(CountryService.GetAll(), "CountryID", "CountryName", employee.CountryID);
+            ViewBag.TurnID = new SelectList(TurnService.GetAll(), "TurnID", "Description", employee.TurnID);
+            return View(employee);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "EmployeeID,FirstName,LastName,CountryID,TurnID,HireDate")] Employees employee)
+        {
+            if (ModelState.IsValid)
+            {
+                EmployeeService.Update(employee);
+                return RedirectToAction("Index");
+            }
+            ViewBag.CountryID = new SelectList(CountryService.GetAll(), "CountryID", "CountryName", employee.CountryID);
+            ViewBag.TurnID = new SelectList(TurnService.GetAll(), "TurnID", "Description", employee.TurnID);
+            return View(employee);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employees employee = EmployeeService.FindID(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
+        }
+        
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Employees employee = EmployeeService.FindID(id);
+            EmployeeService.Remove(employee);
+            
+            return RedirectToAction("Index");
+        }
+
+
     }
 
 }
