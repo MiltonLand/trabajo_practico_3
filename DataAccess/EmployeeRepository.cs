@@ -31,5 +31,14 @@ namespace DataAccess
             }
         }
 
+        public Employees FindInclude(int? id)
+        {
+            using (DataModel context = new DataModel())
+            {
+                return context.Employees.Include(e => e.Country).Include(e => e.Turns).Where(e=>e.EmployeeID==id).FirstOrDefault();
+
+            }
+        }
+
     }
 }

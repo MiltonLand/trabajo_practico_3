@@ -19,7 +19,7 @@ namespace Services
         public static Employees FindID(int? id)
         {
             var EmployeeRep = new EmployeeRepository();
-            return EmployeeRep.FindID(id);
+            return EmployeeRep.FindInclude(id);
            
         }
 
