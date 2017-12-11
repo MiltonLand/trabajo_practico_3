@@ -21,9 +21,9 @@ namespace Entities
         [StringLength(50)]
         [DisplayName("Apellido")]
         public string LastName { get; set; }
-
+        [DisplayName("País")]
         public int CountryID { get; set; }
-
+        [DisplayName("Turno")]
         public int TurnID { get; set; }
         [DisplayName("Fecha de contratación")]
         public DateTime? HireDate { get; set; }
