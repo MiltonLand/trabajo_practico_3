@@ -1,0 +1,84 @@
+﻿@*@model List<EmployeesDto>*@
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p>
+    @Html.ActionLink("Nuevo Empleado", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("País")
+        </th>
+        <th>
+            @Html.DisplayName("Turno")
+        </th>
+        <th>
+            @Html.DisplayName("Nombre")
+        </th>
+        <th>
+            @Html.DisplayName("Apellido")
+        </th>
+        <th>
+            @Html.DisplayName("Fecha de ingreso")
+        </th>
+        <th></th>
+    </tr>
+
+    @*LISTA DE EJEMPLO. A RELLENAR CON CAMPOS REALES*@
+
+    @for (int i = 0; i < 5; i++)
+    {
+        <tr>
+            <td>
+                @Html.DisplayName("Argentina")
+            </td>
+            <td>
+                @Html.DisplayName("Mañana")
+            </td>
+            <td>
+                @Html.DisplayName("Pepe")
+            </td>
+            <td>
+                @Html.DisplayName("Argento")
+            </td>
+            <td>
+                @Html.DisplayName("20/10/2015")
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { @*id = item.EmployeeID*@ }) | 
+                @Html.ActionLink("Borrar", "Delete", new { @*id = item.EmployeeID*@ })
+            </td>
+        </tr>
+
+    }
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Turns.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HireDate)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.EmployeeID }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.EmployeeID }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.EmployeeID })
+            </td>
+        </tr>
+    }*@
+
+</table>
