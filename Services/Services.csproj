@@ -42,14 +42,13 @@
   <ItemGroup>
     <Compile Include="CountryService.cs" />
     <Compile Include="EmployeeService.cs" />
+    <Compile Include="Model\CoutryDto.cs" />
+    <Compile Include="Model\EmployeesDto.cs" />
+    <Compile Include="Model\WorkingDayDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurnService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{A7AAF6B2-87AD-4D8D-8C79-D7228FCBDFAB}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{BA424F01-B4F6-439A-AC57-1C7F24E39363}</Project>
       <Name>Entities</Name>

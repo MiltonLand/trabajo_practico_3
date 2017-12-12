@@ -5,42 +5,88 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Services.Model;
 
 namespace Services
 {
-    public static class EmployeeService
+    public class EmployeeService
     {
-        public static List<Employees> GetAll() {
-            var EmployeeRep = new EmployeeRepository();
-              var list = EmployeeRep.GetEmployeesInclude();
-            return list;
+        private Repository<DataAccess.Employees> _employeeRepository;
+
+        public EmployeeService()
+        {
+            _employeeRepository = new Repository<DataAccess.Employees>();
         }
 
-        public static Employees FindID(int? id)
-        {
-            var EmployeeRep = new EmployeeRepository();
-            return EmployeeRep.FindInclude(id);
-           
+        public List<EmployeesDto> GetAll() {
+
+            var employees = _employeeRepository.Set().Select(c => new EmployeesDto
+            {
+                EmployeeID = c.EmployeeID,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                CountryID = c.CountryID,
+                Shift = c.Shift,
+                HireDate = c.HireDate
+            }).ToList();
+
+            return employees;
         }
 
-        public static void Add(Employees employee)
+        public  EmployeesDto FindID(int? id)
         {
-            var EmployeeRep = new EmployeeRepository();
-            EmployeeRep.Create(employee);
+            var employee =  _employeeRepository.Set().FirstOrDefault(c => c.EmployeeID == id);
+
+            var newEmployee = new EmployeesDto
+            {
+                EmployeeID = employee.EmployeeID,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                CountryID = employee.CountryID,
+                Shift = employee.Shift,
+                HireDate = employee.HireDate
+            };
+
+            return newEmployee;
+        }
+
+        public  void Save(EmployeesDto employee)
+        {
+            var newEmployee = new DataAccess.Employees
+            {
+                EmployeeID = employee.EmployeeID,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                CountryID = employee.CountryID,
+                Shift = employee.Shift,
+                HireDate = employee.HireDate
+            };
+
+            _employeeRepository.Persist(newEmployee);
+            _employeeRepository.SaveChanges();
 
         }
 
-        public static void Update(Employees employee)
+        public void Update(EmployeesDto employee)
         {
-            var EmployeeRep = new EmployeeRepository();
-            EmployeeRep.Update(employee);
+            var newEmployee = _employeeRepository.Set().FirstOrDefault(c => c.EmployeeID == employee.EmployeeID);
 
+            newEmployee.EmployeeID = employee.EmployeeID;
+            newEmployee.FirstName = employee.FirstName;
+            newEmployee.LastName = employee.LastName;
+            newEmployee.CountryID = employee.CountryID;
+            newEmployee.Shift = employee.Shift;
+            newEmployee.HireDate = employee.HireDate;
+
+            _employeeRepository.SaveChanges();
         }
 
-        public static void Remove(Employees employee)
+        public void Delete(EmployeesDto employee)
         {
-            var EmployeeRep = new EmployeeRepository();
-            EmployeeRep.Delete(employee);
+            var newEmployee = _employeeRepository.Set().FirstOrDefault(c => c.EmployeeID == employee.EmployeeID);
+
+            _employeeRepository.Remove(newEmployee);
+            _employeeRepository.SaveChanges();
 
         }
     }

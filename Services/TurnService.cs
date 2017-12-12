@@ -10,10 +10,6 @@ namespace Services
 {
     public static class TurnService
     {
-        public static List<Turns> GetAll()
-        {
-            var TR = new TurnRepository();
-            return TR.GetAll();
-        }
+       
     }
 }
