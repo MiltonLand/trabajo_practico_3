@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.Model
 {
-    public class CoutryDto
+    public class CountryDto
     {
         public int CountryID { get; set; }
 

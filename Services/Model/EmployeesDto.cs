@@ -16,7 +16,7 @@ namespace Services.Model
 
         public int CountryID { get; set; }
 
-        public int Shift { get; set; }
+        public string Shift { get; set; }
 
         public DateTime? HireDate { get; set; }
 

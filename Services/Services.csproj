@@ -42,16 +42,16 @@
   <ItemGroup>
     <Compile Include="CountryService.cs" />
     <Compile Include="EmployeeService.cs" />
-    <Compile Include="Model\CoutryDto.cs" />
+    <Compile Include="Model\CountryDto.cs" />
     <Compile Include="Model\EmployeesDto.cs" />
     <Compile Include="Model\WorkingDayDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurnService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{BA424F01-B4F6-439A-AC57-1C7F24E39363}</Project>
-      <Name>Entities</Name>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{a7aaf6b2-87ad-4d8d-8c79-d7228fcbdfab}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
