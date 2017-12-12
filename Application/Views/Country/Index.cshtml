@@ -1,0 +1,35 @@
+﻿@*@model List<CountryDto>*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p>
+    @Html.ActionLink("Agregar país", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("País")
+        </th>
+        <th></th>
+    </tr>
+
+    @*LISTA DE EJEMPLO. A RELLENAR CON CAMPOS REALES*@
+
+    @for (int i = 0; i < 5; i++)
+    {
+        <tr>
+            <td>
+                @Html.DisplayName("Argentina")
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { @*id = item.EmployeeID*@ }) |
+                @Html.ActionLink("Borrar", "Delete", new { @*id = item.EmployeeID*@ })
+            </td>
+        </tr>
+
+    }
+
+</table>

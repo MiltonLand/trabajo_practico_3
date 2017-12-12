@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    //Propongo usar el repositorio que hizo Cesar en clase, o sea, el siguiente:
-    //El resto del código de repositorios no lo entendí mucho, así que no sé si está bien o mal
-    //este me parece más simple.
-
     public class Repository<T>
         where T : class
     {
