@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Model
+namespace Services.Dtos
 {
     public class EmployeesDto
     {
@@ -19,6 +19,5 @@ namespace Services.Model
         public string Shift { get; set; }
 
         public DateTime? HireDate { get; set; }
-
     }
 }

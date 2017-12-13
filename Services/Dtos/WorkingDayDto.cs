@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Model
+namespace Services.Dtos
 {
     public class WorkingDayDto
     {

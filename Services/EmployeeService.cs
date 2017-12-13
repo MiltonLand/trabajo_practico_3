@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Services.Model;
+using Services.Dtos;
 
 namespace Services
 {
@@ -32,7 +32,7 @@ namespace Services
             return employees;
         }
 
-        public  EmployeesDto FindID(int? id)
+        public  EmployeesDto Find(int id)
         {
             var employee =  _employeeRepository.Set().FirstOrDefault(c => c.EmployeeID == id);
 
@@ -49,7 +49,7 @@ namespace Services
             return newEmployee;
         }
 
-        public  void Save(EmployeesDto employee)
+        public void Create(EmployeesDto employee)
         {
             var newEmployee = new DataAccess.Employees
             {
@@ -63,7 +63,6 @@ namespace Services
 
             _employeeRepository.Persist(newEmployee);
             _employeeRepository.SaveChanges();
-
         }
 
         public void Update(EmployeesDto employee)
