@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class TurnService
     {
        
