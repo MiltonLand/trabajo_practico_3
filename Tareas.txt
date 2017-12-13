@@ -1,0 +1,50 @@
+- modificar db y capa dataacces
+(nueva tabla shifts, insert tres turnos, insertar working days y empleados y countries)
+(agregar campo precio hora)
+(agregar horas trabajas) 
+ 
+DANIEL
+
+
+- crud empleados
+MILTON 
+
+- crud paises 
+SEBASTIAN
+
+- service empleado
+(List<Employee> GetByShift(string shift))
+(quitar ids) hecho
+SEBASTIAN
+
+
+
+- service country
+(sacar id)
+SEBASTIAN
+
+
+-services WorkingDay
+(con validaciones)
+(public workingdayDto GetHoursWorked(int EmployeeId, int year, int mounth))
+DANIEL
+
+
+-pantalla agregar ingresos salidas
+MILTON
+
+
+- Enum en employeeDto  ( ver)))
+DANIEL
+
+-pantalla horas trabajadas
+MILTON
+
+- agregar estas tareas a los issue
+SEBASTIAN
+
+
+
+
+
+
