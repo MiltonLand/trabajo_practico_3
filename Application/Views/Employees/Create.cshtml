@@ -1,141 +1,78 @@
-﻿@*@model Entities.Employees*@
+﻿@model List<Services.Dtos.CountryDto>
 
 @{
     ViewBag.Title = "Crear";
 }
 
-<h2>Crear</h2>
+<h2>Crear empleado</h2>
 
 
-@using (Html.BeginForm())
-{
+<form action="/employees/creation" method="post" class="validate-form">
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Employees</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nombre</label>
             <div class="col-md-10">
-                @Html.Editor("Nombre", new { htmlAttributes = new { @class = "form-control" } })
+                <input required type="text" name="fName" placeholder="Nombre" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Apellido</label>
+            <div class="col-md-10">
+                <input required type="text" name="lName" placeholder="Apellido" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">País</label>
+            <div class="col-md-10">
+                <select name="countryId" class="btn btn-block">
+                    @foreach (var p in Model)
+                    {
+                        <option value="@p.CountryID">@p.CountryName</option>
+                    }
+                </select>
             </div>
         </div>
 
 
         <div class="form-group">
-            @Html.Label("Apellido", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Turno</label>
             <div class="col-md-10">
-                @Html.Editor("Apellido", new { htmlAttributes = new { @class = "form-control" } })
+
+                <select name="shift" class="btn btn-block">
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noche">Noche</option>
+                </select>
+
             </div>
         </div>
 
-
         <div class="form-group">
-            @Html.Label("País", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Fecha de ingreso</label>
             <div class="col-md-10">
-                @Html.Editor("País", new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.Label("Turno", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Editor("Turno", new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.Label("Fecha de ingreso", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" class="datepicker">
+                <input required class="datepicker btn date-input" name="hireDate">
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="reset" class="btn btn-default cancel btn-sm">Cancelar</button>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default accept">Crear</button>
+                <button type="reset" class="btn cancel btn-side-margin btn-glow">Cancelar</button>
+                <button type="submit" class="btn accept btn-side-margin btn-glow">Crear</button>
             </div>
         </div>
     </div>
-}
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-
-@*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Employees</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CountryID, "CountryID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TurnID, "TurnID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TurnID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TurnID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+</form>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}*@
+}

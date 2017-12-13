@@ -10,11 +10,11 @@ namespace Services
 {
     public class EmployeeService
     {
-        private Repository<DataAccess.Employees> _employeeRepository;
+        private Repository<Employees> _employeeRepository;
 
         public EmployeeService()
         {
-            _employeeRepository = new Repository<DataAccess.Employees>();
+            _employeeRepository = new Repository<Employees>();
         }
 
         public List<EmployeesDto> GetAll() {
@@ -64,6 +64,19 @@ namespace Services
             _employeeRepository.Persist(newEmployee);
             _employeeRepository.SaveChanges();
         }
+        public void Create(string fName, string lName, int countryId, string shift, DateTime hireDate)
+        {
+            var newEmployee = new Employees();
+            newEmployee.FirstName = fName;
+            newEmployee.LastName = lName;
+            newEmployee.CountryID = countryId;
+            newEmployee.Shift = shift;
+            newEmployee.HireDate = hireDate;
+
+            _employeeRepository.Persist(newEmployee);
+            _employeeRepository.SaveChanges();
+        }
+
 
         public void Update(EmployeesDto employee)
         {
