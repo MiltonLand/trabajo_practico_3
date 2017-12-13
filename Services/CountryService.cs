@@ -43,7 +43,6 @@ namespace Services
         {
             var newCountry = new Country
             {
-                CountryID = country.CountryID,
                 CountryName = country.CountryName
             };
 
@@ -51,11 +50,10 @@ namespace Services
             _countryRepository.SaveChanges();
         }
 
-        public void Create(int countryId, string name)
+        public void Create(string name)
         {
             var newCountry = new Country();
-
-            newCountry.CountryID = countryId;
+            
             newCountry.CountryName = name;
 
             _countryRepository.Persist(newCountry);
@@ -65,12 +63,21 @@ namespace Services
 
         public void Update(CountryDto country)
         {
-            var newCountry = _countryRepository.Set().FirstOrDefault(c => c.CountryID == country.CountryID);
+            if(countryAlreadyExists(country.CountryName))
+            {
+                var newCountry = _countryRepository.Set()
+                //.Where(c => c.CountryName != country.CountryName)
+                .FirstOrDefault(c => c.CountryID == country.CountryID);
 
-            newCountry.CountryID = country.CountryID;
-            newCountry.CountryName = country.CountryName;
+                newCountry.CountryName = country.CountryName;
 
-            _countryRepository.SaveChanges();
+                _countryRepository.SaveChanges();
+            }
+            else
+            {
+                
+            }
+            return;
         }
 
         public void Delete(CountryDto country)
@@ -80,6 +87,15 @@ namespace Services
             _countryRepository.Remove(newCountry);
             _countryRepository.SaveChanges();
 
+        }
+
+        public bool countryAlreadyExists(string countryName)
+        {
+            var exists = _countryRepository.Set()
+                .Where(c => c.CountryName == countryName)
+                .Any();
+
+            return exists;
         }
     }
 }
