@@ -14,7 +14,6 @@ namespace DataAccess
 
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<WorkingDay> WorkingDay { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,9 +24,17 @@ namespace DataAccess
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Employees>()
+                .Property(e => e.HourPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Employees>()
                 .HasMany(e => e.WorkingDay)
                 .WithRequired(e => e.Employees)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<WorkingDay>()
+                .Property(e => e.WorkedHours)
+                .HasPrecision(18, 0);
         }
     }
 }
