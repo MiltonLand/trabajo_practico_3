@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Services;
 
 namespace Application.Controllers
 {
@@ -10,6 +11,10 @@ namespace Application.Controllers
     {
         public ActionResult Index()
         {
+            var services = new CountryService();
+
+            services.Create("Argentina");
+            var exists = services.countryAlreadyExists("Argentina");
             return View();
         }
 
