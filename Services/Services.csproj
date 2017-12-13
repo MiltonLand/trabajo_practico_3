@@ -46,7 +46,7 @@
     <Compile Include="Dtos\EmployeesDto.cs" />
     <Compile Include="Dtos\WorkingDayDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnService.cs" />
+    <Compile Include="WorkingDayService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

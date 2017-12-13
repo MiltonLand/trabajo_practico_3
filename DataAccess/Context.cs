@@ -8,12 +8,13 @@ namespace DataAccess
     public partial class Context : DbContext
     {
         public Context()
-            : base("name=Context")
+            : base("name=Context1")
         {
         }
 
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<WorkingDay> WorkingDay { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
