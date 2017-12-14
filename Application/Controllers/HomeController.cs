@@ -14,7 +14,7 @@ namespace Application.Controllers
             var services = new CountryService();
 
             services.Create("Argentina");
-            var exists = services.countryAlreadyExists("Argentina");
+
             return View();
         }
 

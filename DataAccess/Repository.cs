@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace DataAccess
 {
-
-   public class Repository<T>
-          where T : class
+    public class Repository<T>
+           where T : class
     {
         private Context _context;
 

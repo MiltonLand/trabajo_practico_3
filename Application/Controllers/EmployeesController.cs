@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Services;
+using Services.Dtos;
 
 namespace Application.Controllers
 {
@@ -12,8 +13,11 @@ namespace Application.Controllers
         public ActionResult Index()
         {
             var employeeService = new EmployeeService();
+            var countryService = new CountryService();
 
-            return View(employeeService.GetAll());
+            var tuple = Tuple.Create(employeeService.GetAll(), countryService.GetAll());
+
+            return View(tuple);
         }
 
         public ActionResult Edit()
@@ -28,13 +32,38 @@ namespace Application.Controllers
             return View(countryService.GetAll());
         }
         [HttpPost]
-        public ActionResult Creation(string fName, string lName, int countryId, string shift, DateTime hireDate)
+        public ActionResult Creation(string fName, string lName, int countryId, string shift, DateTime hiringDate, decimal hourlyWage)
         {
             var employeeService = new EmployeeService();
+            var countryService = new CountryService();
 
-            employeeService.Create(fName, lName, countryId, shift, hireDate);
+            var employeeDto = new EmployeeDto()
+            {
+                FirstName = fName,
+                LastName = lName,
+                CountryID = countryId,
+                Shift = employeeService.StringToShift(shift),
+                HiringDate = hiringDate,
+                HourlyWage = hourlyWage
+            };
 
-            return View("Index", employeeService.GetAll());
+            employeeService.Create(employeeDto);
+            
+            var tuple = Tuple.Create(employeeService.GetAll(), countryService.GetAll());
+
+            return View("Index", tuple);
+        }
+        
+        public ActionResult Delete(int id)
+        {
+            var employeeService = new EmployeeService();
+            var countryService = new CountryService();
+
+            employeeService.Delete(id);
+
+            var tuple = Tuple.Create(employeeService.GetAll(), countryService.GetAll());
+
+            return View("Index", tuple);
         }
     }
 }

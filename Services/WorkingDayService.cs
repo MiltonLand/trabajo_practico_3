@@ -26,7 +26,7 @@ namespace Services
                                                           EmployeeID = c.EmployeeID,
                                                           TimeIn = c.TimeIn,
                                                           TimeOut = c.TimeOut,
-                                                          WorkedHours = c.WorkedHours
+                                                          WorkedHours = c.HoursWorked
                                                       })
                                                       .ToList();
 

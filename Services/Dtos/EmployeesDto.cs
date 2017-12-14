@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Services.Dtos
 {
-    public class EmployeesDto
+    public class EmployeeDto
     {
+        public enum Shifts {
+            FirstShift,
+            SecondShift,
+            ThirdShift
+        }
+
         public int EmployeeID { get; set; }
 
         public string FirstName { get; set; }
@@ -16,8 +22,10 @@ namespace Services.Dtos
 
         public int CountryID { get; set; }
 
-        public string Shift { get; set; }
+        public Shifts Shift { get; set; }
 
-        public DateTime? HireDate { get; set; }
+        public DateTime? HiringDate { get; set; }
+
+        public decimal HourlyWage { get; set; }
     }
 }

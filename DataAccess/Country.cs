@@ -9,10 +9,9 @@ namespace DataAccess
     [Table("Country")]
     public partial class Country
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Country()
         {
-            Employees = new HashSet<Employees>();
+            Employees = new HashSet<Employee>();
         }
 
         public int CountryID { get; set; }
@@ -21,7 +20,6 @@ namespace DataAccess
         [StringLength(20)]
         public string CountryName { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees> Employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

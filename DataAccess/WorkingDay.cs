@@ -17,8 +17,8 @@ namespace DataAccess
 
         public DateTime? TimeOut { get; set; }
 
-        public decimal? WorkedHours { get; set; }
+        public int? HoursWorked { get; set; }
 
-        public virtual Employees Employees { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

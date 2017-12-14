@@ -1,9 +1,8 @@
-﻿@model List<Services.Dtos.EmployeesDto>
+﻿@model Tuple<List<Services.Dtos.EmployeeDto>, List<Services.Dtos.CountryDto>>
 
 @{
     ViewBag.Title = "Index";
 }
-
 
 <p>
     @Html.ActionLink("Nuevo Empleado", "Create")
@@ -25,29 +24,53 @@
         <th>
             @Html.DisplayName("Fecha de ingreso")
         </th>
+        <th>
+            @Html.DisplayName("Valor de la hora")
+        </th>
         <th></th>
     </tr>
 
-@foreach (var employee in Model)
+@foreach (var employee in Model.Item1)
 {
     <tr>
         <td>
-            @Html.DisplayFor(e => employee.CountryID)
+            <span>@Model.Item2.FirstOrDefault(c => c.CountryID == employee.CountryID).CountryName</span>
         </td>
+
         <td>
-            @Html.DisplayFor(e => employee.Shift)
+            @switch (employee.Shift)
+            {
+                case Services.Dtos.EmployeeDto.Shifts.FirstShift:
+                    <span>Mañana</span>
+                    break;
+                case Services.Dtos.EmployeeDto.Shifts.SecondShift:
+                    <span>Tarde</span>
+                    break;
+                case Services.Dtos.EmployeeDto.Shifts.ThirdShift:
+                    <span>Noche</span>
+                    break;
+            }
         </td>
+
         <td>
             @Html.DisplayFor(e => employee.FirstName)
         </td>
+
         <td>
             @Html.DisplayFor(e => employee.LastName)
         </td>
+
         <td>
-            @Html.DisplayFor(e => employee.HireDate)
+            @Html.DisplayFor(e => employee.HiringDate)
         </td>
+
         <td>
-            <a href="/employees/edit?id=@employee.EmployeeID" class="active">Editar</a>
+            @Html.DisplayFor(e => employee.HourlyWage)
+        </td>
+
+        <td>
+            <a href = "/employees/edit?id=@employee.EmployeeID" class="active">Editar</a> | 
+            <a href="/employees/delete?id=@employee.EmployeeID" class="active">Borrar</a>
             @*@Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) | 
             @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })*@
         </td>

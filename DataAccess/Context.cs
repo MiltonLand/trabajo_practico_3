@@ -8,14 +8,13 @@ namespace DataAccess
     public partial class Context : DbContext
     {
         public Context()
-            : base("name=Context1")
+            : base("name=Context")
         {
         }
 
-        public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<WorkingDay> WorkingDay { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<WorkingDay> WorkingDays { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -24,18 +23,14 @@ namespace DataAccess
                 .WithRequired(e => e.Country)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Employees>()
-                .Property(e => e.HourPrice)
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.HourlyWage)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Employees>()
-                .HasMany(e => e.WorkingDay)
-                .WithRequired(e => e.Employees)
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.WorkingDays)
+                .WithRequired(e => e.Employee)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<WorkingDay>()
-                .Property(e => e.WorkedHours)
-                .HasPrecision(18, 0);
         }
     }
 }
