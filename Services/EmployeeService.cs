@@ -253,31 +253,33 @@ namespace Services
             return (hourlyWage > 0);
         }
 
-        public List<EmployeeDto> GetEmployeeShift(Shifts shift)
+        public List<EmployeesWorkig> GetEmployeeShift(Shifts shift)
         {
-
             var workingDayServices = new WorkingDayService();
-            // var wor = workingDayServices.GetAllForEmp();
+            var wor = workingDayServices.GetAllForEmp();
 
             var emp = this.GetAll().Where(c => c.Shift == shift).ToList();
 
-            //var employeeWorking = emp.Join(wor,
-            //                               e => e.EmployeeID,
-            //                               w => w.EmployeeID,
-            //                               (e, w) => new EmployeesWorkig
-            //                               {
-            //                                    EmployeeID = e.EmployeeID,
-            //                                    FirstName = e.FirstName,
-            //                                    LastName = e.LastName,
-            //                                    TimeIn = w.TimeIn,
-            //                                    TimeOut = w.TimeOut,
-            //                                    WorkedHours = w.WorkedHours,
-            //                                    Shift = e.Shift
-            //                               }).Where(c => c.Shift == shift)
-            //                               .DefaultIfEmpty()
-            //                               .ToList();
+            var empWor = emp.GroupJoin(wor,
+                                  e => e.EmployeeID,
+                                  w => w.EmployeeID,
+                                  (e, w) => new { EmployeeDto = e, WorkingDayDto = w })
+                                  .SelectMany(
+                                   ews => ews.WorkingDayDto.DefaultIfEmpty(),
+                                   (x, y) => new EmployeesWorkig
+                                   {
+                                       EmployeeID = x.EmployeeDto.EmployeeID,
+                                       WorkingDayID = y == null ? 0 : y.WorkingDayID,
+                                       FirstName = x.EmployeeDto.FirstName,
+                                       LastName = x.EmployeeDto.LastName,
+                                       TimeIn = y == null ? (DateTime?)null : y.TimeIn,
+                                       TimeOut = y == null ? (DateTime?)null : y.TimeOut,
+                                       WorkedHours = y == null ? 0 : y.WorkedHours,
+                                       Shift = x.EmployeeDto.Shift
+                                   }).ToList();
 
-            return emp;
+
+            return empWor;
         }
     }
 }

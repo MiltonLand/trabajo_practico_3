@@ -17,7 +17,20 @@ namespace Services
             _workingDayRepository = new Repository<WorkingDay>();
         }
 
+        public List<WorkingDayDto> GetAllForEmp()
+        {
+            var workingDayDto = _workingDayRepository.Set().Select(c=> new WorkingDayDto
+            {
+                WorkingDayID = c.WorkingDayID,
+                EmployeeID = c.EmployeeID,
+                TimeIn = c.TimeIn,
+                TimeOut = c.TimeOut,
+                WorkedHours = c.WorkedHours
+            }).Where(c=> c.TimeIn.Day == DateTime.Now.Day)
+            .ToList();
 
+            return workingDayDto;
+        }
 
         public List<WorkingDayDto> GetHoursWorked(int EmployeeId, int year, int mounth)
         {

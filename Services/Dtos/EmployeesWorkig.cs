@@ -9,13 +9,15 @@ namespace Services.Dtos
 {
     public class EmployeesWorkig
     {
-        public int EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
+
+        public int? WorkingDayID { get; set; }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public Shifts Shift { get; set; }
+        public Shifts? Shift { get; set; }
 
         public DateTime? TimeIn { get; set; }
 

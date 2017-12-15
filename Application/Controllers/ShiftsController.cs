@@ -28,32 +28,34 @@ namespace Application.Controllers
 
             return View("SelectShift", list);
         }
-
-        [HttpPost]
-        public ActionResult AddTime(int? ddl)
+        
+        public ActionResult AddTime(EmployeesWorkig employee)
         {
             ViewBag.NewRow = null;
             ViewBag.TimeOut = false;
-            Session["EmployeeID"] = ddl;
+            Session["EmployeeID"] = employee.EmployeeID;
+            Session["WorkingDayID"] = employee.WorkingDayID;
+
+
+           Session["TimeIn"] = employee.TimeIn.GetValueOrDefault().Hour;
+            
+            
 
             var workingDayServices = new WorkingDayService();
-            var workingDay = workingDayServices.GetWorkingDayById(ddl);
+            //var workingDay = workingDayServices.GetWorkingDayById(EmployeeID);
 
 
-            if (workingDay != null)
-            {
-                if (workingDay.TimeOut != null)
-                {
-                    ViewBag.TimeOut = true;
-                }
-                               
+            if (employee.TimeIn == null)
+            {                             
                 ViewBag.NewRow = true;
-                Session["WorkingDayID"] = workingDay.WorkingDayID;
-                Session["TimeIn"] = workingDay.TimeIn.Hour;
+            }
+            else if(employee.TimeOut == null)
+            {
+                ViewBag.NewRow = false;
             }
             else
             {
-                ViewBag.NewRow = false;
+                ViewBag.TimeOut = true;
             }
 
             return View("SelectShift");
@@ -91,10 +93,7 @@ namespace Application.Controllers
             int hourP = Int32.Parse(hour);
             DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hourP, 0, 0);
 
-            dateTime.AddHours((double)Convert.ToInt32(hour));
-            dateTime.AddYears(DateTime.Now.Year);
-            dateTime.AddMonths(DateTime.Now.Month);
-            dateTime.AddDays(DateTime.Now.Day);
+            
 
             var workingDayDto = new WorkingDayDto
             {

@@ -1,5 +1,5 @@
 ﻿
-@model List<Services.Dtos.EmployeeDto>
+@model List<Services.Dtos.EmployeesWorkig>
 
 @{
     ViewBag.Title = "Ingresar turno";
@@ -34,30 +34,72 @@
 
 @if (Model != null)
 {
-    using (Html.BeginForm("AddTime", "Shifts", FormMethod.Post))
-    {
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Turno")
+            </th>
+            <th>
+                @Html.DisplayName("Nombre")
+            </th>
+            <th>
+                @Html.DisplayName("Apellido")
+            </th>
+            <th>
+                @Html.DisplayName("Horario de ingreso")
+            </th>
+            <th>
+                @Html.DisplayName("Horario de salida")
+            </th>
+            <th>
+                @Html.DisplayName("Horas Trabajadas")
+            </th>
+            <th>
 
-            <div class="form-group">
-                <div class="col-md-10">
-                    <h5>Ingrese empleado</h5>
+            </th>
+        </tr>
 
-                    @Html.DropDownList("ddl",
-                                        new SelectList(Model.Select(x => new { Value = x.EmployeeID, Text = (x.FirstName + " " + x.LastName) }),
-                                                       "Value",
-                                                        "Text"
-                                                        ), new { @class = "btn btn-block" }
-                                      )
-                    <br>
-                    <button type="submit" class="btn btn-default accept">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    }
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(e => employee.Shift)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(e => employee.FirstName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(e => employee.LastName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(e => employee.TimeIn)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(e => employee.TimeOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(e => employee.WorkedHours)
+                </td>
+
+
+                <td>
+                   @if (employee.TimeIn == null || employee.TimeOut == null)
+                   {
+                    @Html.ActionLink("Editar", "AddTime", employee)
+                   }
+                </td>
+            </tr>
+        }
+
+    </table>
+
 }
 
-@if (ViewBag.NewRow == false)
+@if (ViewBag.NewRow == true)
 {
 
     using (Html.BeginForm("AddRow", "Shifts", FormMethod.Post))
@@ -72,7 +114,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">Horario de entrada</label>
                         <div class="col-md-10">
-                            <input required type="text" name="hour" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+                            <input required type="number" min="0" max="24" name="hour" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
                         </div>
                     </div>
                     <br>
@@ -83,7 +125,7 @@
     }
 
 }
-else if (ViewBag.NewRow == true)
+else if (ViewBag.NewRow != true)
 {
     if (ViewBag.TimeOut == false)
     {
@@ -99,7 +141,8 @@ else if (ViewBag.NewRow == true)
                         <div class="form-group">
                             <label class="control-label col-md-2">Horario de salida</label>
                             <div class="col-md-10">
-                                <input required type="text" name="hour" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+                                <input required min="0" max="24" type="number" name="hour" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+                            
                             </div>
                         </div>
 
@@ -110,11 +153,10 @@ else if (ViewBag.NewRow == true)
             </div>
         }
     }
-    else
-    {
-        <script>alert("El empleado ya tiene salida para este día, Nos vemos Mañana!!!")</script>
-    }
 }
+
+
+
 
 
 
