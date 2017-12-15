@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Made by OrangeTeam</title>
 
     @*stylesheets*@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
     <script src="~/Scripts/jquery.validate.js"></script>
 </head>
 <body>
-    <nav id="nav-3">
+    <nav id="nav-3" class="navbar-">
         <a class="link-3" href="/home/index">Home</a>
         <a class="link-3" href="/employees/index">Empleados</a>
         <a class="link-3" href="/country/index">Paises</a>
@@ -30,7 +30,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year  -  TP3  ASP.NET  WEB  MVC - Milton Landriel - Sebastián Flores - Pablo Alejandro Silva Franco - Daniel Alejandro Riba </h6></p>
+            <p>&copy; @DateTime.Now.Year  -  TP3 ASP.NET  WEB MVC - Milton Landriel - Sebastián Flores - Pablo Alejandro Silva Franco - Daniel Alejandro Riba</p>
         </footer>
     </div>
 
@@ -49,14 +49,15 @@
 
             jQuery.validator.addClassRules("number-validation", {
                 number: true,
+                min: 0.01
             });
             $.validator.addMethod("alphabet", function (value, element) {
                 return this.optional(element) || value == value.match(/^[a-zA-Z\áéíóúñÁÉÍÓÚÑ]+$/);
             }, "Ingrese sólo letras.");
-            
+
             $.validator.addMethod("date-lt-today", function (value, element) {
                 return Date.parse(value) <= Date.now();
-            }, "Ingrese una fecha anterior a hoy.");
+            }, "Ingrese una fecha menor o igual a hoy.");
 
             jQuery.validator.addClassRules("name-validation", {
                 minlength: 2,
@@ -81,7 +82,7 @@
                 rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
                 range: jQuery.validator.format("Please enter a value between {0} and {1}."),
                 max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
-                min: jQuery.validator.format("Please enter a value greater than or equal to {0}."),
+                min: jQuery.validator.format("Ingrese un número mayor o igual a {0}."),
             });
         });
     </script>

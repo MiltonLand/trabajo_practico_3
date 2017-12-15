@@ -27,9 +27,15 @@ namespace Services
 
             return listEmployeesDtos;
         }
-        
+
         public void Create(EmployeeDto employeeDto)
         {
+            this.AddToDatabase(CreateFromDto(employeeDto));
+        }
+        public void Create(string fName, string lName, string country, string shift, DateTime hiringDate, decimal hourlyWage)
+        {
+            var employeeDto = CreateDto(fName, lName, country, shift, hiringDate, hourlyWage);
+
             this.AddToDatabase(CreateFromDto(employeeDto));
         }
 
@@ -58,10 +64,9 @@ namespace Services
 
                 var countryService = new CountryService();
 
-                var country = countryService.Read(employeeDto.CountryID);
+                var country = countryService.Read(employeeDto.Country);
                 var shift = this.ShiftToString(employeeDto.Shift);
 
-                employee.EmployeeID = employeeDto.EmployeeID;
                 employee.FirstName = employeeDto.FirstName;
                 employee.LastName = employeeDto.LastName;
                 employee.CountryID = country.CountryID;
@@ -79,7 +84,6 @@ namespace Services
                                     .Set()
                                     .FirstOrDefault(c => c.EmployeeID == employee.EmployeeID));
         }
-
         public void Delete(int employeeId)
         {
             this.DeleteFromDatabase(_employeeRepository
@@ -87,6 +91,23 @@ namespace Services
                                     .FirstOrDefault(c => c.EmployeeID == employeeId));
         }
 
+        public EmployeeDto CreateDto(string fName, string lName, string country, string shift,
+                                     DateTime hiringDate, decimal hourlyWage, int id = 0)
+        {
+            var employeeDto = new EmployeeDto();
+
+            if (id > 0)
+                employeeDto.EmployeeID = id;
+
+            employeeDto.FirstName = fName;
+            employeeDto.LastName = lName;
+            employeeDto.Country = country;
+            employeeDto.Shift = this.StringToShift(shift);
+            employeeDto.HiringDate = hiringDate;
+            employeeDto.HourlyWage = hourlyWage;
+
+            return employeeDto;
+        }
         public string ShiftToString(Shifts s)
         {
             string shift;
@@ -109,8 +130,6 @@ namespace Services
 
             return shift;
         }
-
-
         public Shifts StringToShift(string s)
         {
             Shifts shift;
@@ -143,7 +162,6 @@ namespace Services
             _employeeRepository.Persist(e);
             _employeeRepository.SaveChanges();
         }
-
         private void DeleteFromDatabase(Employee e)
         {
             if (e == null)
@@ -152,7 +170,6 @@ namespace Services
             _employeeRepository.Remove(e);
             _employeeRepository.SaveChanges();
         }
-
         private EmployeeDto ConvertToDto(Employee e)
         {
             var countryService = new CountryService();
@@ -163,20 +180,18 @@ namespace Services
                 EmployeeID = e.EmployeeID,
                 FirstName = e.FirstName,
                 LastName = e.LastName,
-                //CountryID = country.CountryName,
-                CountryID = country.CountryID,
+                Country = country.CountryName,
                 Shift = StringToShift(e.Shift),
                 HiringDate = e.HiringDate,
                 HourlyWage = e.HourlyWage
             };
         }
-
         private Employee CreateFromDto(EmployeeDto employeeDto)
         {
             if (ValidDto(employeeDto))
             {
                 var countryService = new CountryService();
-                var country = countryService.Read(employeeDto.CountryID);
+                var country = countryService.Read(employeeDto.Country);
                 var shift = this.ShiftToString(employeeDto.Shift);
 
                 return new Employee()
@@ -192,12 +207,11 @@ namespace Services
 
             return null;
         }
-
         private bool ValidDto(EmployeeDto employeeDto)
         {
-            return ValidString(employeeDto.FirstName)      &&
-                   ValidString(employeeDto.LastName)       &&
-                   //ValidCountryName(employeeDto.CountryID)   &&
+            return ValidString(employeeDto.FirstName) &&
+                   ValidString(employeeDto.LastName) &&
+                   ValidCountryName(employeeDto.Country) &&
                    ValidHiringDate(employeeDto.HiringDate) &&
                    ValidWage(employeeDto.HourlyWage);
         }
@@ -205,16 +219,17 @@ namespace Services
         //Individual Validations
         private bool ValidString(string s)
         {
+            if (s == null)
+                return false;
             //Verdadero si la cadena no es vacía, 
             //tiene longitud mayor a 2 y menor o igual a 50, 
-            //y no tiene dígitos.
+            //y no tiene digitos.
             var len = s.Count();
-            return ((s != "")  && 
-                    (len > 2)  && 
-                    (len <= 50) && 
+            return ((s != "") &&
+                    (len > 2) &&
+                    (len <= 50) &&
                     (!s.Any(c => char.IsDigit(c))));
         }
-
         private bool ValidCountryName(string countryName)
         {
             if (!ValidString(countryName))
@@ -226,7 +241,6 @@ namespace Services
 
             return (country != null);
         }
-
         private bool ValidHiringDate(DateTime? hiringDate)
         {
             if (hiringDate != null)
@@ -234,7 +248,6 @@ namespace Services
 
             return true;
         }
-
         private bool ValidWage(decimal hourlyWage)
         {
             return (hourlyWage > 0);

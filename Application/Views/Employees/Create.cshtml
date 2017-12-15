@@ -16,24 +16,24 @@
         <div class="form-group">
             <label class="control-label col-md-2">Nombre</label>
             <div class="col-md-10">
-                <input required type="text" name="fName" placeholder="Nombre" class="form-control name-validation" maxlength="50"/>
+                <input required type="text" name="fName" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-2">Apellido</label>
             <div class="col-md-10">
-                <input required type="text" name="lName" placeholder="Apellido" class="form-control name-validation" maxlength="50"/>
+                <input required type="text" name="lName" placeholder="Apellido" class="form-control name-validation" maxlength="50" />
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-2">País</label>
             <div class="col-md-10">
-                <select name="countryId" class="btn btn-block">
+                <select name="country" class="btn btn-block">
                     @foreach (var p in Model)
                     {
-                        <option value="@p.CountryID">@p.CountryName</option>
+                        <option value="@p.CountryName">@p.CountryName</option>
                     }
                 </select>
             </div>
@@ -44,9 +44,9 @@
             <div class="col-md-10">
 
                 <select name="shift" class="btn btn-block">
-                    <option value="mañana">Mañana</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="noche">Noche</option>
+                    <option value="Mañana">Mañana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
                 </select>
 
             </div>

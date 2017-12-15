@@ -11,7 +11,7 @@ namespace DataAccess
             : base("name=Context")
         {
         }
-
+        
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<WorkingDay> WorkingDay { get; set; }
