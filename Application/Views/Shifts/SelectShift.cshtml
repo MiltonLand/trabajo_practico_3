@@ -1,4 +1,5 @@
-﻿@*model List<EmployeeDto> *@
+﻿
+@model List<Services.Dtos.EmployeeDto>
 
 @{
     ViewBag.Title = "Ingresar turno";
@@ -6,7 +7,7 @@
 
 <h2>Ingresar horario</h2><br>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("GetEmployees", "Shifts", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -18,16 +19,102 @@
                 <h5>Ingrese el turno</h5>
 
                 <select name="shift" class="btn btn-block">
-                    <option value="mañana">Mañana</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="noche">Noche</option>
+                    <option @(ViewBag.SelectedShift == "mañana" ? "selected" : "") value="mañana">Mañana</option>
+                    <option @(ViewBag.SelectedShift == "tarde" ? "selected" : "") value="tarde">Tarde</option>
+                    <option @(ViewBag.SelectedShift == "noche" ? "selected" : "") value="noche">Noche</option>
                 </select>
+
                 <br>
-
                 <button type="submit" class="btn btn-default accept">Aceptar</button>
-
             </div>
         </div>
-
     </div>
 }
+
+
+@if (Model != null)
+{
+    using (Html.BeginForm("AddTime", "Shifts", FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Ingrese empleado</h5>
+
+                    @Html.DropDownList("ddl",
+                                        new SelectList(Model.Select(x => new { Value = x.EmployeeID, Text = (x.FirstName + " " + x.LastName) }),
+                                                       "Value",
+                                                        "Text"
+                                                        ), new { @class = "btn btn-block" }
+                                      )
+                    <br>
+                    <button type="submit" class="btn btn-default accept">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (ViewBag.NewRow == false)
+{
+
+    using (Html.BeginForm("AddRow", "Shifts", FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Ingrese el horario</h5>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Horario de entrada</label>
+                        <div class="col-md-10">
+                            <input required type="text" name="hour" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-default accept">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    }
+
+}
+else if (ViewBag.NewRow == true)
+{
+    if (ViewBag.TimeOut == false)
+    {
+        using (Html.BeginForm("UpdateRow", "Shifts", FormMethod.Post))
+        {
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <h5>Ingrese el horario</h5>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Horario de salida</label>
+                            <div class="col-md-10">
+                                <input required type="text" name="hour" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-default accept">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <script>alert("El empleado ya tiene salida para este día, Nos vemos Mañana!!!")</script>
+    }
+}
+
+
+

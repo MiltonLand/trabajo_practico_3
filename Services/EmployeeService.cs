@@ -252,5 +252,32 @@ namespace Services
         {
             return (hourlyWage > 0);
         }
+
+        public List<EmployeeDto> GetEmployeeShift(Shifts shift)
+        {
+
+            var workingDayServices = new WorkingDayService();
+            // var wor = workingDayServices.GetAllForEmp();
+
+            var emp = this.GetAll().Where(c => c.Shift == shift).ToList();
+
+            //var employeeWorking = emp.Join(wor,
+            //                               e => e.EmployeeID,
+            //                               w => w.EmployeeID,
+            //                               (e, w) => new EmployeesWorkig
+            //                               {
+            //                                    EmployeeID = e.EmployeeID,
+            //                                    FirstName = e.FirstName,
+            //                                    LastName = e.LastName,
+            //                                    TimeIn = w.TimeIn,
+            //                                    TimeOut = w.TimeOut,
+            //                                    WorkedHours = w.WorkedHours,
+            //                                    Shift = e.Shift
+            //                               }).Where(c => c.Shift == shift)
+            //                               .DefaultIfEmpty()
+            //                               .ToList();
+
+            return emp;
+        }
     }
 }
