@@ -22,8 +22,6 @@ namespace Services.Dtos
 
         public int CountryID { get; set; }
 
-        //public string CountryName { get; set; }
-
         public Shifts Shift { get; set; }
 
         public DateTime? HiringDate { get; set; }
