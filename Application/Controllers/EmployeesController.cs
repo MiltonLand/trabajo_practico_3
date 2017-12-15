@@ -12,62 +12,60 @@ namespace Application.Controllers
     {
         public ActionResult Index()
         {
+            return View(new EmployeeService().GetAll());
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return View("Index", new EmployeeService().GetAll());
+
             var employeeService = new EmployeeService();
             var countryService = new CountryService();
+            var employee = employeeService.Read((int)id);
 
-            var tuple = Tuple.Create(employeeService.GetAll(), countryService.GetAll());
+            if (employee == null)
+                return View("Index", employeeService.GetAll());
+
+            var tuple = Tuple.Create(employee, countryService.GetAll());
 
             return View(tuple);
         }
 
-        public ActionResult Edit()
+        [HttpPost]
+        public ActionResult Edition(int id, string fName, string lName, string country, string shift, DateTime hiringDate, decimal hourlyWage)
         {
-            return View();
+            var employeeService = new EmployeeService();
+
+            var employeeDto = employeeService.CreateDto(fName, lName, country, shift, hiringDate, hourlyWage, id);
+
+            employeeService.Update(employeeDto);
+
+            return View("Index", employeeService.GetAll());
         }
 
         public ActionResult Create()
         {
-            var countryService = new CountryService();
-
-            return View(countryService.GetAll());
+            return View(new CountryService().GetAll());
         }
 
         [HttpPost]
-        public ActionResult Creation(string fName, string lName, int countryId, string shift, DateTime hiringDate, decimal hourlyWage)
+        public ActionResult Creation(string fName, string lName, string country, string shift, DateTime hiringDate, decimal hourlyWage)
         {
             var employeeService = new EmployeeService();
-            var countryService = new CountryService();
 
-            var country = countryService.Read(countryId);
-            var countryName = country.CountryName;
+            employeeService.Create(fName, lName, country, shift, hiringDate, hourlyWage);
 
-            var employeeDto = new EmployeeDto()
-            {
-                FirstName = fName,
-                LastName = lName,
-                Country = countryName,
-                Shift = employeeService.StringToShift(shift),
-                HiringDate = hiringDate,
-                HourlyWage = hourlyWage
-            };
-
-            employeeService.Create(employeeDto);
-            
-            var tuple = Tuple.Create(employeeService.GetAll(), countryService.GetAll());
-
-            return View("Index", tuple);
+            return View("Index", employeeService.GetAll());
         }
-        
+
         public ActionResult Delete(int id)
         {
             var employeeService = new EmployeeService();
-            var countryService = new CountryService();
 
             employeeService.Delete(id);
 
-            var tuple = Tuple.Create(employeeService.GetAll(), countryService.GetAll());
-
-            return View("Index", tuple);
+            return View("Index", employeeService.GetAll());
         }
     }
 }
