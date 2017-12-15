@@ -1,0 +1,121 @@
+﻿@model Services.Dtos.EmployeeDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h2>¿Borrar empleado?</h2>
+
+<br />
+
+<div class="col-sm-6">
+    <table class="table table-hover">
+        <tr>
+            <th class="">
+                <label>Campo</label>
+            </th>
+            <th class="">
+                <label>Empleado</label>
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <label>ID: </label>
+            </td>
+            <td>
+                <label>@Model.EmployeeID.ToString()</label>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <label>Nombre: </label>
+            </td>
+            <td>
+                <label>@Model.FirstName</label>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <label>Apellido: </label>
+            </td>
+            <td>
+                <label>@Model.LastName</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>País: </label>
+            </td>
+            <td>
+                <label>@Model.Country</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Turno: </label>
+            </td>
+            <td>
+                @if (Model.Shift == Services.Dtos.EmployeeDto.Shifts.FirstShift)
+            {
+                    <label>Mañana</label>
+                }
+                @if (Model.Shift == Services.Dtos.EmployeeDto.Shifts.SecondShift)
+            {
+                    <label>Tarde</label>
+                }
+                @if (Model.Shift == Services.Dtos.EmployeeDto.Shifts.ThirdShift)
+            {
+                    <label>Noche</label>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Fecha de ingreso: </label>
+            </td>
+            <td>
+                @if (Model.HiringDate != null)
+            {
+                var hiringDate = (DateTime)Model.HiringDate;
+                    <label>@hiringDate.ToString("dd/MM/yyyy")</label>
+                }
+                else
+                {
+                    <label></label>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Precio por hora: </label>
+            </td>
+            <td>
+                <label>@Model.HourlyWage.ToString()</label>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+
+<form action="/employees/remove" method="post">
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input hidden value="@Model.EmployeeID" name="id" />
+            <a href="/employees/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
+            <button type="submit" class="btn accept btn-side-margin btn-glow">Aceptar</button>
+        </div>
+    </div>
+
+</form>
+

@@ -40,24 +40,25 @@
         $(document).ready(function () {
 
             $('.datepicker').datepicker({
+                inline: true,
                 monthNames: ["Enero", "Febreo", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
                 dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
-                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"]
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                maxDate: "+0d"
             });
 
             $('.validate-form').validate();
 
             jQuery.validator.addClassRules("number-validation", {
-                number: true,
                 min: 0.01
             });
             $.validator.addMethod("alphabet", function (value, element) {
                 return this.optional(element) || value == value.match(/^[a-zA-Z\áéíóúñÁÉÍÓÚÑ]+$/);
             }, "Ingrese sólo letras.");
 
-            $.validator.addMethod("date-lt-today", function (value, element) {
-                return Date.parse(value) <= Date.now();
-            }, "Ingrese una fecha menor o igual a hoy.");
+            $.validator.addMethod("decimal-validation", function (value, element) {
+                return this.optional(element) || value == value.replace(",", ".");
+            }, "Ingrese un número válido.");
 
             jQuery.validator.addClassRules("name-validation", {
                 minlength: 2,
@@ -82,7 +83,7 @@
                 rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
                 range: jQuery.validator.format("Please enter a value between {0} and {1}."),
                 max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
-                min: jQuery.validator.format("Ingrese un número mayor o igual a {0}."),
+                min: jQuery.validator.format("Ingrese un número válido."),
             });
         });
     </script>

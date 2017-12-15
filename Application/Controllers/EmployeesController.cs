@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Services;
@@ -10,6 +12,12 @@ namespace Application.Controllers
 {
     public class EmployeesController : Controller
     {
+        public EmployeesController()
+        {
+            //Sets formats to english.
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+        }
+
         public ActionResult Index()
         {
             return View(new EmployeeService().GetAll());
@@ -60,6 +68,14 @@ namespace Application.Controllers
         }
 
         public ActionResult Delete(int id)
+        {
+            var employeeService = new EmployeeService();
+
+            return View(employeeService.Read(id));
+        }
+
+        [HttpPost]
+        public ActionResult Remove(int id)
         {
             var employeeService = new EmployeeService();
 

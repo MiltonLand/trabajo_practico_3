@@ -335,6 +335,7 @@
     <Content Include="Views\Country\Edit.cshtml" />
     <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Shifts\SelectShift.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
