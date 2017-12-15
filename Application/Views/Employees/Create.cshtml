@@ -30,10 +30,10 @@
         <div class="form-group">
             <label class="control-label col-md-2">País</label>
             <div class="col-md-10">
-                <select name="country" class="btn btn-block">
+                <select name="countryId" class="btn btn-block">
                     @foreach (var p in Model)
                     {
-                        <option value="@p.CountryName">@p.CountryName</option>
+                        <option value="@p.CountryID">@p.CountryName</option>
                     }
                 </select>
             </div>
@@ -44,9 +44,9 @@
             <div class="col-md-10">
 
                 <select name="shift" class="btn btn-block">
-                    <option value="Mañana">Mañana</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Noche">Noche</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noche">Noche</option>
                 </select>
 
             </div>

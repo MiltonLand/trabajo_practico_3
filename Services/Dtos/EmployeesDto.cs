@@ -20,7 +20,9 @@ namespace Services.Dtos
 
         public string LastName { get; set; }
 
-        public string Country { get; set; }
+        public int CountryID { get; set; }
+
+        //public string CountryName { get; set; }
 
         public Shifts Shift { get; set; }
 

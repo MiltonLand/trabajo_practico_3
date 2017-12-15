@@ -1,5 +1,4 @@
-﻿@*@model List<CountryDto>*@
-
+﻿@model List<Services.Dtos.CountryDto>
 @{
     ViewBag.Title = "Index";
 }
@@ -13,20 +12,25 @@
         <th>
             @Html.DisplayName("País")
         </th>
-        <th></th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
     @*LISTA DE EJEMPLO. A RELLENAR CON CAMPOS REALES*@
 
-    @for (int i = 0; i < 5; i++)
+    @*for (int i = 0; i < 5; i++)*@
+    @foreach (var country in Model)
     {
         <tr>
             <td>
-                @Html.DisplayName("Argentina")
+                @*Html.DisplayName("Argentina")*@
+                @Html.DisplayName(country.CountryName)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { @*id = item.EmployeeID*@ }) |
-                @Html.ActionLink("Borrar", "Delete", new { @*id = item.EmployeeID*@ })
+                @Html.ActionLink("Editar", "Edit", new Services.Dtos.CountryDto { CountryID=country.CountryID, CountryName =country.CountryName}) @*{ id = country.CountryID }) |*@
+                 / 
+                @Html.ActionLink("Borrar", "Delete", new Services.Dtos.CountryDto { CountryID = country.CountryID, CountryName = country.CountryName}) @*{ id = country.CountryID }) |*@
             </td>
         </tr>
 

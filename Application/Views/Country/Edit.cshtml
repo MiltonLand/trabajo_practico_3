@@ -1,4 +1,4 @@
-﻿@*@model Services.CountryDto *@
+﻿@model Services.Dtos.CountryDto 
 
 @{
     ViewBag.Title = "Editar país";
@@ -6,32 +6,48 @@
 
 <h2>Editar país</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+@*using (Html.BeginForm())*@
+@*{*@
+    <form action="/country/update" method="post" class="validate-form">
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Empleados</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*@Html.HiddenFor(model => model.EmployeeID)*@
+        <div class="form-horizontal">
+            <h6>Por favor ingrese el nuevo valor para cada campo que quiera modificar</h6>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*@Html.HiddenFor(model => model.EmployeeID)*@
 
-        <div class="form-group">
-            @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Editor("Nombre", new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group">
+                @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newCountryName" value="@Model.CountryName" class="form-control" type="text" name="newCountryName" />
+                    
+                    @Html.HiddenFor(model => model.CountryID)
+                    
+                    <br />
+
+                </div>
             </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default accept">Guardar cambios</button>
+                </div>
+            </div>
+
+        </div>
+        </form>
+@*}*@
+
+        <div>
+            @Html.ActionLink("Volver", "Index")
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default accept">Guardar cambios</button>
-            </div>
-        </div>
+<script>
 
-    </div>
-}
+    function EditCountry()
+    {
+        return;
+    }
 
-<div>
-    @Html.ActionLink("Volver", "Index")
-</div>
+</script>

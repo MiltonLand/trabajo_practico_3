@@ -12,9 +12,9 @@ namespace DataAccess
         {
         }
 
-        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<WorkingDay> WorkingDays { get; set; }
+        public virtual DbSet<WorkingDay> WorkingDay { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,8 +28,8 @@ namespace DataAccess
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Employee>()
-                .HasMany(e => e.WorkingDays)
-                .WithRequired(e => e.Employee)
+                .HasMany(e => e.WorkingDay)
+                .WithRequired(e => e.Employees)
                 .WillCascadeOnDelete(false);
         }
     }

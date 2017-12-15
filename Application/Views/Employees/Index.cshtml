@@ -1,4 +1,4 @@
-﻿@model List<Services.Dtos.EmployeeDto>
+﻿@model Tuple<List<Services.Dtos.EmployeeDto>, List<Services.Dtos.CountryDto>>
 
 @{
     ViewBag.Title = "Index";
@@ -10,13 +10,13 @@
 <table class="table">
     <tr>
         <th>
-            <label>País</label>
+            @Html.DisplayName("País")
         </th>
         <th>
             @Html.DisplayName("Turno")
         </th>
         <th>
-            <label>Nombre</label>
+            @Html.DisplayName("Nombre")
         </th>
         <th>
             @Html.DisplayName("Apellido")
@@ -30,11 +30,11 @@
         <th></th>
     </tr>
 
-@foreach (var employee in Model)
+@foreach (var employee in Model.Item1)
 {
     <tr>
         <td>
-            @Html.DisplayFor(e => employee.Country)
+            <span>@Model.Item2.FirstOrDefault(c => c.CountryID == employee.CountryID).CountryName</span>
         </td>
 
         <td>
@@ -61,15 +61,7 @@
         </td>
 
         <td>
-            @if (employee.HiringDate != null)
-            {
-                var hiringDate = (DateTime)employee.HiringDate;
-                <span>@hiringDate.ToString("dd/MM/yyyy")</span>
-            }
-            else
-            {
-                @Html.Display("")
-            }
+            @Html.DisplayFor(e => employee.HiringDate)
         </td>
 
         <td>
@@ -77,8 +69,10 @@
         </td>
 
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) | 
-            @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })
+            <a href = "/employees/edit?id=@employee.EmployeeID" class="active">Editar</a> | 
+            <a href="/employees/delete?id=@employee.EmployeeID" class="active">Borrar</a>
+            @*@Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) | 
+            @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })*@
         </td>
     </tr>
 }
