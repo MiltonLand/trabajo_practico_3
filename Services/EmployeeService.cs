@@ -32,6 +32,12 @@ namespace Services
         {
             this.AddToDatabase(CreateFromDto(employeeDto));
         }
+        public void Create(string fName, string lName, string country, string shift, DateTime hiringDate, decimal hourlyWage)
+        {
+            var employeeDto = CreateDto(fName, lName, country, shift, hiringDate, hourlyWage);
+
+            this.AddToDatabase(CreateFromDto(employeeDto));
+        }
 
         public EmployeeDto Read(int id)
         {
@@ -44,7 +50,7 @@ namespace Services
 
             return ConvertToDto(employee);
         }
-
+        
         public void Update(EmployeeDto employeeDto)
         {
             if (ValidDto(employeeDto))
@@ -60,8 +66,7 @@ namespace Services
 
                 var country = countryService.Read(employeeDto.Country);
                 var shift = this.ShiftToString(employeeDto.Shift);
-
-                employee.EmployeeID = employeeDto.EmployeeID;
+                
                 employee.FirstName = employeeDto.FirstName;
                 employee.LastName = employeeDto.LastName;
                 employee.CountryID = country.CountryID;
@@ -85,7 +90,24 @@ namespace Services
                                     .Set()
                                     .FirstOrDefault(c => c.EmployeeID == employeeId));
         }
+        
+        public EmployeeDto CreateDto(string fName, string lName, string country, string shift, 
+                                     DateTime hiringDate, decimal hourlyWage, int id = 0)
+        {
+            var employeeDto = new EmployeeDto();
 
+            if (id > 0)
+                employeeDto.EmployeeID = id;
+
+            employeeDto.FirstName = fName;
+            employeeDto.LastName = lName;
+            employeeDto.Country = country;
+            employeeDto.Shift = this.StringToShift(shift);
+            employeeDto.HiringDate = hiringDate;
+            employeeDto.HourlyWage = hourlyWage;
+
+            return employeeDto;
+        }
         public string ShiftToString(Shifts s)
         {
             string shift;
@@ -197,6 +219,8 @@ namespace Services
         //Individual Validations
         private bool ValidString(string s)
         {
+            if (s == null)
+                return false;
             //Verdadero si la cadena no es vacía, 
             //tiene longitud mayor a 2 y menor o igual a 50, 
             //y no tiene digitos.
