@@ -25,68 +25,155 @@ namespace Services
                 CountryName = c.CountryName
             }).ToList();
         }
-
-        public CountryDto Find(int id)
-        {
-            var country = _countryRepository.Set().FirstOrDefault(c => c.CountryID == id);
-
-            var newCountry = new CountryDto
-            {
-                CountryID = country.CountryID,
-                CountryName = country.CountryName
-            };
-
-            return newCountry;
-        }
-
+        
         public void Create(string name)
         {
             if (!this.Exists(name))
             {
-                var newCountry = new Country()
-                {
+                this.AddToDatabase(new Country() {
                     CountryName = name
-                };
-                _countryRepository.Persist(newCountry);
+                });
+            }
+        }
+
+        public CountryDto Read(int id)
+        {
+            var country = GetCountry(id);
+
+            if (country == null)
+                return null;
+
+            return new CountryDto
+            {
+                CountryID = country.CountryID,
+                CountryName = country.CountryName
+            };
+        }
+        public CountryDto Read(string countryName)
+        {
+            var country = GetCountry(countryName);
+
+            if (country == null)
+                return null;
+
+            return new CountryDto
+            {
+                CountryID = country.CountryID,
+                CountryName = country.CountryName
+            };
+        }
+
+        public void Update(CountryDto countryDto)
+        {
+            if(this.Exists(countryDto.CountryName))
+            {
+                var country = GetCountry(countryDto);
+
+                if (country == null)
+                    return;
+
+                country.CountryName = countryDto.CountryName;
+
+                _countryRepository.SaveChanges();
+            }
+        }
+        public void Update(int countryId, string newName)
+        {
+            if (this.Exists(countryId))
+            {
+                var country = GetCountry(countryId);
+
+                if (country == null)
+                    return;
+
+                country.CountryName = newName;
+
+                _countryRepository.SaveChanges();
+            }
+        }
+        public void Update(string currentName, string newName)
+        {
+            if (this.Exists(currentName))
+            {
+                var country = GetCountry(currentName);
+
+                if (country == null)
+                    return;
+
+                country.CountryName = newName;
+
                 _countryRepository.SaveChanges();
             }
         }
 
-
-        public void Update(CountryDto country)
+        public void Delete(CountryDto countryDto)
         {
-            if(Exists(country.CountryName))
-            {
-                var newCountry = _countryRepository.Set()
-                //.Where(c => c.CountryName != country.CountryName)
-                .FirstOrDefault(c => c.CountryID == country.CountryID);
+            var country = GetCountry(countryDto);
 
-                newCountry.CountryName = country.CountryName;
+            this.DeleteFromDatabase(country);
+        }
+        public void Delete(int countryId)
+        {
+            var country = GetCountry(countryId);
 
-                _countryRepository.SaveChanges();
-            }
-            else
-            {
-                
-            }
-            return;
+            this.DeleteFromDatabase(country);
+        }
+        public void Delete(string countryName)
+        {
+            var country = GetCountry(countryName);
+            
+            this.DeleteFromDatabase(country);
         }
 
-        public void Delete(CountryDto country)
+        private Country GetCountry(CountryDto countryDto)
         {
-            var newCountry = _countryRepository.Set().FirstOrDefault(c => c.CountryID == country.CountryID);
+            var country = _countryRepository
+                 .Set()
+                 .FirstOrDefault(c => c.CountryID == countryDto.CountryID);
 
-            _countryRepository.Remove(newCountry);
+            if (country == null)
+                country = _countryRepository
+                             .Set()
+                             .FirstOrDefault(c => c.CountryName == countryDto.CountryName);
+
+            return country;
+        }
+        private Country GetCountry(int countryId)
+        {
+            return _countryRepository
+                   .Set()
+                   .FirstOrDefault(c => c.CountryID == countryId);
+        }
+        private Country GetCountry(string countryName)
+        {
+            return _countryRepository
+                   .Set()
+                   .FirstOrDefault(c => c.CountryName == countryName);
+        }
+        private void AddToDatabase(Country c)
+        {
+            _countryRepository.Persist(c);
             _countryRepository.SaveChanges();
-
         }
-
-        public bool Exists(string countryName)
+        private void DeleteFromDatabase(Country c)
         {
-            var exists = _countryRepository.Set()
-                .FirstOrDefault(c => c.CountryName == countryName);
+            if (c == null)
+                return;
 
-            return exists == null;
+            _countryRepository.Remove(c);
+            _countryRepository.SaveChanges();
+        }
+        private bool Exists(int countryId)
+        {
+            return _countryRepository
+                   .Set()
+                   .Any(c => c.CountryID == countryId);
+        }
+        private bool Exists(string countryName)
+        {
+            return _countryRepository
+                   .Set()
+                   .Any(c => c.CountryName == countryName);
         }
     }
 }
