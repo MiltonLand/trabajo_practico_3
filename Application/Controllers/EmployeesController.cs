@@ -38,11 +38,14 @@ namespace Application.Controllers
             var employeeService = new EmployeeService();
             var countryService = new CountryService();
 
+            var country = countryService.Read(countryId);
+            var countryName = country.CountryName;
+
             var employeeDto = new EmployeeDto()
             {
                 FirstName = fName,
                 LastName = lName,
-                CountryID = countryId,
+                Country = countryName,
                 Shift = employeeService.StringToShift(shift),
                 HiringDate = hiringDate,
                 HourlyWage = hourlyWage
