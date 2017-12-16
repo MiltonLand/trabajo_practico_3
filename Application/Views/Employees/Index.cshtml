@@ -13,19 +13,19 @@
             <label>País</label>
         </th>
         <th>
-            @Html.DisplayName("Turno")
+            <label>Turno</label>
         </th>
         <th>
             <label>Nombre</label>
         </th>
         <th>
-            @Html.DisplayName("Apellido")
+            <label>Apellido</label>
         </th>
         <th>
-            @Html.DisplayName("Fecha de ingreso")
+            <label>Fecha de ingreso</label>
         </th>
         <th>
-            @Html.DisplayName("Valor de la hora")
+            <label>Valor de la hora</label>
         </th>
         <th></th>
     </tr>
@@ -77,7 +77,7 @@
             </td>
 
             <td>
-                @Html.ActionLink("Ver salario", "Salary", new { id = employee.EmployeeID }) |
+                @Html.ActionLink("Ver salarios", "Index", "Salary", new { id = employee.EmployeeID }, null) |
                 @Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) |
                 @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })
             </td>

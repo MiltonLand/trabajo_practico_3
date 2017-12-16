@@ -23,6 +23,6 @@ namespace Services.Dtos
 
         public DateTime? TimeOut { get; set; }
 
-        public int? WorkedHours { get; set; }
+        public decimal? HoursWorked { get; set; }
     }
 }

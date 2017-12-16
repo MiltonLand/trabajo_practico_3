@@ -83,23 +83,5 @@ namespace Application.Controllers
 
             return View("Index", employeeService.GetAll());
         }
-
-        public ActionResult Salary(int id)
-        {
-            var employeeService = new EmployeeService();
-            var workingDayService = new WorkingDayService();
-
-            var year = DateTime.Today.Year;
-            var month = DateTime.Today.Month;
-            
-            var workingDaysMonth = workingDayService.GetAllForEmployeeInMonth(id, year, month);
-
-            var tuple = Tuple.Create(employeeService.Read(id), workingDaysMonth);
-
-            var salary = employeeService.Salary(id, year, month);
-            ViewBag.Salary = salary;
-
-            return View(tuple);
-        }
     }
 }

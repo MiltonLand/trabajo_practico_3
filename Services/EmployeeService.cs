@@ -275,7 +275,7 @@ namespace Services
                                        LastName = x.EmployeeDto.LastName,
                                        TimeIn = y == null ? (DateTime?)null : y.TimeIn,
                                        TimeOut = y == null ? (DateTime?)null : y.TimeOut,
-                                       WorkedHours = y == null ? 0 : y.WorkedHours,
+                                       HoursWorked = y == null ? 0 : y.HoursWorked,
                                        Shift = x.EmployeeDto.Shift
                                    }).ToList();
             

@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{9975db24-49f3-4a33-8095-24344a2c7f79}</Project>
+      <Project>{dcbc71bf-a76f-4e09-bb6f-ae431dd8cc57}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>

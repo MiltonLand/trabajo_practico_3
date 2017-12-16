@@ -25,7 +25,7 @@ namespace Services
                 EmployeeID = c.EmployeeID,
                 TimeIn = c.TimeIn,
                 TimeOut = c.TimeOut,
-                WorkedHours = c.WorkedHours
+                HoursWorked = c.HoursWorked
             }).Where(c=> c.TimeIn.Day == DateTime.Now.Day)
             .ToList();
 
@@ -50,7 +50,7 @@ namespace Services
                     EmployeeID = workingDay.EmployeeID,
                     TimeIn = workingDay.TimeIn,
                     TimeOut = workingDay.TimeOut,
-                    WorkedHours = workingDay.WorkedHours
+                    HoursWorked = workingDay.HoursWorked
                 };
 
                 return workingDayDto;
@@ -64,7 +64,7 @@ namespace Services
                 EmployeeID = workingDayP.EmployeeID,
                 TimeIn = workingDayP.TimeIn,
                 TimeOut = workingDayP.TimeOut,
-                WorkedHours = workingDayP.WorkedHours
+                HoursWorked = workingDayP.HoursWorked
             };
 
             _workingDayRepository.Persist(workingDay);
@@ -80,7 +80,7 @@ namespace Services
             workigDay.EmployeeID = workingDayP.EmployeeID;
             
             workigDay.TimeOut = workingDayP.TimeOut;
-            workigDay.WorkedHours = workingDayP.WorkedHours;
+            workigDay.HoursWorked = workingDayP.HoursWorked;
 
             _workingDayRepository.SaveChanges();
         }
@@ -97,7 +97,7 @@ namespace Services
                                     EmployeeID = c.EmployeeID,
                                     TimeIn = c.TimeIn,
                                     TimeOut = c.TimeOut,
-                                    WorkedHours = c.WorkedHours
+                                    HoursWorked = c.HoursWorked
                                 }).Where(c => c.TimeIn.Day == DateTime.Now.Day)
                                 .ToList();
         }
@@ -130,30 +130,30 @@ namespace Services
 
             foreach (var workingDay in workingDays)
             {
-                if (workingDay.WorkedHours != null)
+                if (workingDay.HoursWorked != null)
                 {
-                    totalHours += (int)workingDay.WorkedHours;
+                    totalHours += (int)workingDay.HoursWorked;
                 }
             }
 
             return totalHours;
         }
 
-        private WorkingDayDto CreateDto(int workingDayId, int EmployeeId, DateTime TimeIn, DateTime? TimeOut, int? WorkedHours)
+        private WorkingDayDto CreateDto(int workingDayId, int employeeId, DateTime timeIn, DateTime? timeOut, decimal? hoursWorked)
         {
             var workingDayDto = new WorkingDayDto();
 
             workingDayDto.WorkingDayID = workingDayId;
-            workingDayDto.EmployeeID = EmployeeId;
-            workingDayDto.TimeIn = TimeIn;
-            workingDayDto.TimeOut = TimeOut;
-            workingDayDto.WorkedHours = WorkedHours;
+            workingDayDto.EmployeeID = employeeId;
+            workingDayDto.TimeIn = timeIn;
+            workingDayDto.TimeOut = timeOut;
+            workingDayDto.HoursWorked = hoursWorked;
 
             return workingDayDto;
         }
         private WorkingDayDto ConvertoToDto(WorkingDay wd)
         {
-            return this.CreateDto(wd.WorkingDayID, wd.EmployeeID, wd.TimeIn, wd.TimeOut, wd.WorkedHours);
+            return this.CreateDto(wd.WorkingDayID, wd.EmployeeID, wd.TimeIn, wd.TimeOut, wd.HoursWorked);
         }
     }
 }

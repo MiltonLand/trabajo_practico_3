@@ -11,10 +11,10 @@ namespace DataAccess
             : base("name=Context")
         {
         }
-        
-        public virtual DbSet<Country> Country { get; set; }
+
+        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<WorkingDay> WorkingDay { get; set; }
+        public virtual DbSet<WorkingDay> WorkingDays { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,12 +25,23 @@ namespace DataAccess
 
             modelBuilder.Entity<Employee>()
                 .Property(e => e.HourlyWage)
-                .HasPrecision(18, 0);
+                .HasPrecision(6, 2);
 
             modelBuilder.Entity<Employee>()
-                .HasMany(e => e.WorkingDay)
-                .WithRequired(e => e.Employees)
+                .HasMany(e => e.WorkingDays)
+                .WithRequired(e => e.Employee)
+                .HasForeignKey(e => e.EmployeeID)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.WorkingDays1)
+                .WithRequired(e => e.Employee1)
+                .HasForeignKey(e => e.EmployeeID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<WorkingDay>()
+                .Property(e => e.HoursWorked)
+                .HasPrecision(4, 2);
         }
     }
 }

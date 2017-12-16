@@ -151,6 +151,7 @@
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -334,7 +335,8 @@
     <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Shifts\SelectShift.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
-    <Content Include="Views\Employees\Salary.cshtml" />
+    <Content Include="Views\Salary\Show.cshtml" />
+    <Content Include="Views\Salary\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -35,9 +35,7 @@ namespace Application.Controllers
             ViewBag.TimeOut = false;
             Session["EmployeeID"] = employee.EmployeeID;
             Session["WorkingDayID"] = employee.WorkingDayID;
-
-
-           Session["TimeIn"] = employee.TimeIn.GetValueOrDefault().Hour;
+            Session["TimeIn"] = employee.TimeIn.GetValueOrDefault().Hour;
             
             
 
@@ -100,7 +98,7 @@ namespace Application.Controllers
                 WorkingDayID = Int32.Parse(Convert.ToString(Session["WorkingDayID"])),
                 EmployeeID = Int32.Parse(Convert.ToString(Session["EmployeeID"])),
                 TimeOut = dateTime,
-                WorkedHours = dateTime.Hour - Int32.Parse(Convert.ToString(Session["TimeIn"]))
+                HoursWorked = dateTime.Hour - Decimal.Parse(Convert.ToString(Session["TimeIn"]))
             };
 
             workingDayServices.Update(workingDayDto);

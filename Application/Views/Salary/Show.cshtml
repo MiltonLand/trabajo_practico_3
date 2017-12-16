@@ -2,9 +2,16 @@
 
 @{
     ViewBag.Title = "Salary";
+    var months = new[] { "Enero", "Febrero", "Marzo", "Abril",
+                         "Mayo", "Junio", "Julio", "Agosto",
+                         "Septiembre","Octubre", "Noviembre", "Diciembre" };
 }
 
 <h2>@Model.Item1.FirstName @Model.Item1.LastName</h2>
+
+<br />
+
+<h4>Resumen de @months[ViewBag.Month - 1] de @ViewBag.Year</h4>
 
 <br />
 
@@ -28,7 +35,7 @@
             </th>
             <th>
                 <span>
-                    @workingDay.WorkedHours
+                    @workingDay.HoursWorked
                 </span>
             </th>
         </tr>
@@ -45,5 +52,5 @@
 </div>
 
 <div>
-    @Html.ActionLink("Volver", "Index")
+    @Html.ActionLink("Volver", "Index", "Salary", new { id = Model.Item1.EmployeeID }, null)
 </div>

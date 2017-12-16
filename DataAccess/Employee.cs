@@ -11,10 +11,10 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            WorkingDay = new HashSet<WorkingDay>();
+            WorkingDays = new HashSet<WorkingDay>();
+            WorkingDays1 = new HashSet<WorkingDay>();
         }
 
-        [Key]
         public int EmployeeID { get; set; }
 
         [Required]
@@ -37,6 +37,9 @@ namespace DataAccess
         public virtual Country Country { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkingDay> WorkingDay { get; set; }
+        public virtual ICollection<WorkingDay> WorkingDays { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkingDay> WorkingDays1 { get; set; }
     }
 }
