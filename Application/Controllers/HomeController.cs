@@ -11,24 +11,6 @@ namespace Application.Controllers
     {
         public ActionResult Index()
         {
-            var services = new CountryService();
-
-            services.Create("Argentina");
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
