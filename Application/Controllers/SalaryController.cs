@@ -25,9 +25,9 @@ namespace Application.Controllers
             var employeeService = new EmployeeService();
             var workingDayService = new WorkingDayService();
 
-            var workingDaysMonth = workingDayService.GetAllForEmployeeInMonth(id, year, month);
+            var workingDaysInMonth = workingDayService.GetAllForEmployeeInMonth(id, year, month);
 
-            var tuple = Tuple.Create(employeeService.Read(id), workingDaysMonth);
+            var tuple = Tuple.Create(employeeService.Read(id), workingDaysInMonth);
 
             var salary = employeeService.Salary(id, year, month);
             ViewBag.Salary = salary;

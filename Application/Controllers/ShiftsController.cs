@@ -78,7 +78,7 @@ namespace Application.Controllers
                 TimeIn = dateTime
             };
 
-            workingDayServices.Save(workingDayDto);
+            workingDayServices.Create(workingDayDto);
 
             return View("SelectShift");
         }

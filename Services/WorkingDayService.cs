@@ -32,74 +32,26 @@ namespace Services
             return workingDayDto;
         }
 
-        public WorkingDayDto GetWorkingDayById(int? employeeId)
+        public void Create(WorkingDayDto workingDayDto)
         {
-            var workingDay = _workingDayRepository.Set()
-                                                  .FirstOrDefault(c => c.EmployeeID == employeeId && c.TimeIn.Day == DateTime.Now.Day);
-            
+            var workingDay = this.CreateFromDto(workingDayDto);
 
-            if(workingDay == null)
-            {
-                return null;
-            }
-            else
-            {
-                var workingDayDto = new WorkingDayDto
-                {
-                    WorkingDayID = workingDay.WorkingDayID,
-                    EmployeeID = workingDay.EmployeeID,
-                    TimeIn = workingDay.TimeIn,
-                    TimeOut = workingDay.TimeOut,
-                    HoursWorked = workingDay.HoursWorked
-                };
-
-                return workingDayDto;
-            }
+            this.AddToDatabase(workingDay);
         }
 
-        public void Save(WorkingDayDto workingDayP)
+        public void Update (WorkingDayDto workingDayDto)
         {
-            var workingDay = new WorkingDay
-            {
-                EmployeeID = workingDayP.EmployeeID,
-                TimeIn = workingDayP.TimeIn,
-                TimeOut = workingDayP.TimeOut,
-                HoursWorked = workingDayP.HoursWorked
-            };
+            var workigDay = _workingDayRepository.Set().FirstOrDefault(c => c.WorkingDayID == workingDayDto.WorkingDayID);
 
-            _workingDayRepository.Persist(workingDay);
-            _workingDayRepository.SaveChanges();
+            if (workigDay == null)
+                return;
 
-        }
-
-        public void Update (WorkingDayDto workingDayP)
-        {
-            var workigDay = _workingDayRepository.Set().FirstOrDefault(c => c.WorkingDayID == workingDayP.WorkingDayID);
-
-            workigDay.WorkingDayID = workingDayP.WorkingDayID;
-            workigDay.EmployeeID = workingDayP.EmployeeID;
-            
-            workigDay.TimeOut = workingDayP.TimeOut;
-            workigDay.HoursWorked = workingDayP.HoursWorked;
+            workigDay.EmployeeID = workingDayDto.EmployeeID;
+            workigDay.TimeIn = workingDayDto.TimeIn;            
+            workigDay.TimeOut = workingDayDto.TimeOut;
+            workigDay.HoursWorked = workingDayDto.HoursWorked;
 
             _workingDayRepository.SaveChanges();
-        }
-
-        //MODIFICATIONSSSSS BY M
-
-        public List<WorkingDayDto> GetAllToday()
-        {
-            return  _workingDayRepository
-                                .Set()
-                                .Select(c => new WorkingDayDto
-                                {
-                                    WorkingDayID = c.WorkingDayID,
-                                    EmployeeID = c.EmployeeID,
-                                    TimeIn = c.TimeIn,
-                                    TimeOut = c.TimeOut,
-                                    HoursWorked = c.HoursWorked
-                                }).Where(c => c.TimeIn.Day == DateTime.Now.Day)
-                                .ToList();
         }
 
         public List<WorkingDayDto> GetAllForEmployeeInMonth(int employeeId, int year, int month)
@@ -118,7 +70,7 @@ namespace Services
             return workingDaysForEmployee;
         }
 
-        public int GetHoursWorked(int employeeId, int year, int month)
+        internal int GetHoursWorked(int employeeId, int year, int month)
         {
             var workingDays = _workingDayRepository
                               .Set()
@@ -138,7 +90,28 @@ namespace Services
 
             return totalHours;
         }
+        internal void DeleteAllRelated(int employeeId)
+        {
+            IList<WorkingDay> workingDays = _workingDayRepository
+                                                 .Set()
+                                                 .Where(w => w.EmployeeID == employeeId).ToList();
 
+            foreach (var workingDay in workingDays)
+            {
+                this.DeleteFromDatabase(workingDay);
+            }
+        }
+
+        private WorkingDay CreateFromDto(WorkingDayDto workingDayDto)
+        {
+            var workingDay = new WorkingDay();
+            workingDay.EmployeeID = workingDayDto.EmployeeID;
+            workingDay.TimeIn = workingDayDto.TimeIn;
+            workingDay.TimeOut = workingDayDto.TimeOut;
+            workingDay.HoursWorked = workingDayDto.HoursWorked;
+
+            return workingDay;
+        }
         private WorkingDayDto CreateDto(int workingDayId, int employeeId, DateTime timeIn, DateTime? timeOut, decimal? hoursWorked)
         {
             var workingDayDto = new WorkingDayDto();
@@ -153,7 +126,24 @@ namespace Services
         }
         private WorkingDayDto ConvertoToDto(WorkingDay wd)
         {
-            return this.CreateDto(wd.WorkingDayID, wd.EmployeeID, wd.TimeIn, wd.TimeOut, wd.HoursWorked);
+            return this.CreateDto(wd.WorkingDayID, wd.EmployeeID, 
+                                  wd.TimeIn, wd.TimeOut, wd.HoursWorked);
+        }
+        private void AddToDatabase(WorkingDay workingDay)
+        {
+            if (workingDay == null)
+                return;
+
+            _workingDayRepository.Persist(workingDay);
+            _workingDayRepository.SaveChanges();
+        }
+        private void DeleteFromDatabase(WorkingDay workingDay)
+        {
+            if (workingDay == null)
+                return;
+
+            _workingDayRepository.Remove(workingDay);
+            _workingDayRepository.SaveChanges();
         }
     }
 }

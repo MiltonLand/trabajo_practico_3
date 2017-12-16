@@ -17,6 +17,5 @@ namespace Services.Dtos
         public DateTime? TimeOut { get; set; }
 
         public decimal? HoursWorked { get; set; }
-
     }
 }

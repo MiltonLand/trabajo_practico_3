@@ -8,7 +8,6 @@ namespace DataAccess
 
     public partial class Employee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
             WorkingDays = new HashSet<WorkingDay>();
@@ -35,7 +34,6 @@ namespace DataAccess
 
         public virtual Country Country { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkingDay> WorkingDays { get; set; }
     }
 }

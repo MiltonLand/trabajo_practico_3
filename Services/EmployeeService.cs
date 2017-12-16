@@ -78,18 +78,38 @@ namespace Services
             }
         }
 
-        public void Delete(EmployeeDto employee)
+        public void Delete(EmployeeDto employeeDto)
         {
+            var workingDayService = new WorkingDayService();
+
+            workingDayService.DeleteAllRelated(employeeDto.EmployeeID);
+
             this.DeleteFromDatabase(_employeeRepository
                                     .Set()
-                                    .FirstOrDefault(c => c.EmployeeID == employee.EmployeeID));
+                                    .FirstOrDefault(c => c.EmployeeID == employeeDto.EmployeeID));
         }
-
         public void Delete(int employeeId)
         {
+            var workingDayService = new WorkingDayService();
+
+            workingDayService.DeleteAllRelated(employeeId);
+
             this.DeleteFromDatabase(_employeeRepository
                                     .Set()
                                     .FirstOrDefault(c => c.EmployeeID == employeeId));
+        }
+        public decimal Salary(int id, int year, int month)
+        {
+            var employee = _employeeRepository.Set().FirstOrDefault(e => e.EmployeeID == id);
+
+            if (employee == null)
+                return 0;
+
+            var wdService = new WorkingDayService();
+
+            var hoursWorked = wdService.GetHoursWorked(id, year, month);
+
+            return hoursWorked * employee.HourlyWage;
         }
 
         public EmployeeDto CreateDto(string fName, string lName, string country, string shift,
@@ -154,7 +174,7 @@ namespace Services
             return shift;
         }
 
-        //Auxiliary functions
+        //Auxiliary methods
         private void AddToDatabase(Employee e)
         {
             if (e == null)
@@ -280,20 +300,6 @@ namespace Services
                                    }).ToList();
             
             return empWor;
-        }
-
-        public decimal Salary(int id, int year, int month)
-        {
-            var employee = _employeeRepository.Set().FirstOrDefault(e => e.EmployeeID == id);
-
-            if (employee == null)
-                return 0;
-
-            var wdService = new WorkingDayService();
-
-            var hoursWorked = wdService.GetHoursWorked(id, year, month);
-
-            return hoursWorked * employee.HourlyWage;
         }
     }
 }

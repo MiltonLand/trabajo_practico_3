@@ -69,13 +69,11 @@ namespace Application.Controllers
 
         public ActionResult Delete(int id)
         {
-            var employeeService = new EmployeeService();
-
-            return View(employeeService.Read(id));
+            return View(new EmployeeService().Read(id));
         }
 
         [HttpPost]
-        public ActionResult Remove(int id)
+        public ActionResult Deletion(int id)
         {
             var employeeService = new EmployeeService();
 
