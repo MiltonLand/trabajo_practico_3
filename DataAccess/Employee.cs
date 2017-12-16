@@ -12,7 +12,6 @@ namespace DataAccess
         public Employee()
         {
             WorkingDays = new HashSet<WorkingDay>();
-            WorkingDays1 = new HashSet<WorkingDay>();
         }
 
         public int EmployeeID { get; set; }
@@ -38,8 +37,5 @@ namespace DataAccess
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkingDay> WorkingDays { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkingDay> WorkingDays1 { get; set; }
     }
 }

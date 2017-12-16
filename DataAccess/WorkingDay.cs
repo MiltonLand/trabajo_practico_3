@@ -20,7 +20,5 @@ namespace DataAccess
         public decimal? HoursWorked { get; set; }
 
         public virtual Employee Employee { get; set; }
-
-        public virtual Employee Employee1 { get; set; }
     }
 }

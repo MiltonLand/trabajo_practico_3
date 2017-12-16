@@ -30,13 +30,6 @@ namespace DataAccess
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.WorkingDays)
                 .WithRequired(e => e.Employee)
-                .HasForeignKey(e => e.EmployeeID)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.WorkingDays1)
-                .WithRequired(e => e.Employee1)
-                .HasForeignKey(e => e.EmployeeID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<WorkingDay>()

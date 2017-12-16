@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
+
     public class Repository<T>
            where T : class
     {
