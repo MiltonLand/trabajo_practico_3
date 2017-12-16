@@ -1,0 +1,49 @@
+﻿@model Tuple<Services.Dtos.EmployeeDto, List<Services.Dtos.WorkingDayDto>>
+
+@{
+    ViewBag.Title = "Salary";
+}
+
+<h2>@Model.Item1.FirstName @Model.Item1.LastName</h2>
+
+<br />
+
+<div class="col-sm-6">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                <label>Día</label>
+            </th>
+            <th>
+                <label>Horas trabajadas</label>
+            </th>
+        </tr>
+        @foreach (var workingDay in Model.Item2)
+        {
+        <tr>
+            <th>
+                <span>
+                    @workingDay.TimeIn.ToString("dd/MM")
+                </span>
+            </th>
+            <th>
+                <span>
+                    @workingDay.WorkedHours
+                </span>
+            </th>
+        </tr>
+        }
+        <tr>
+            <td>
+                <span>Total a cobrar: </span>
+            </td>
+            <td>
+                <span>$@ViewBag.Salary</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Volver", "Index")
+</div>

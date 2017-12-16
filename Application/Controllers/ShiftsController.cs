@@ -29,7 +29,7 @@ namespace Application.Controllers
             return View("SelectShift", list);
         }
         
-        public ActionResult AddTime(EmployeesWorkig employee)
+        public ActionResult AddTime(EmployeeWorkDay employee)
         {
             ViewBag.NewRow = null;
             ViewBag.TimeOut = false;

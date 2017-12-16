@@ -32,22 +32,6 @@ namespace Services
             return workingDayDto;
         }
 
-        public List<WorkingDayDto> GetHoursWorked(int EmployeeId, int year, int mounth)
-        {
-            var workingDaysDto = _workingDayRepository.Set()
-                                                      .Where(c => c.EmployeeID == EmployeeId && c.TimeIn.Year == year && c.TimeIn.Month == mounth)
-                                                      .Select(c => new WorkingDayDto
-                                                      {
-                                                          EmployeeID = c.EmployeeID,
-                                                          TimeIn = c.TimeIn,
-                                                          TimeOut = c.TimeOut,
-                                                          WorkedHours = c.WorkedHours
-                                                      })
-                                                      .ToList();
-
-            return workingDaysDto;
-        }
-
         public WorkingDayDto GetWorkingDayById(int? employeeId)
         {
             var workingDay = _workingDayRepository.Set()
@@ -99,6 +83,77 @@ namespace Services
             workigDay.WorkedHours = workingDayP.WorkedHours;
 
             _workingDayRepository.SaveChanges();
+        }
+
+        //MODIFICATIONSSSSS BY M
+
+        public List<WorkingDayDto> GetAllToday()
+        {
+            return  _workingDayRepository
+                                .Set()
+                                .Select(c => new WorkingDayDto
+                                {
+                                    WorkingDayID = c.WorkingDayID,
+                                    EmployeeID = c.EmployeeID,
+                                    TimeIn = c.TimeIn,
+                                    TimeOut = c.TimeOut,
+                                    WorkedHours = c.WorkedHours
+                                }).Where(c => c.TimeIn.Day == DateTime.Now.Day)
+                                .ToList();
+        }
+
+        public List<WorkingDayDto> GetAllForEmployeeInMonth(int employeeId, int year, int month)
+        {
+            var workingDays = _workingDayRepository
+                              .Set()
+                              .Where(w => w.EmployeeID == employeeId &&
+                                          w.TimeIn.Year == year &&
+                                          w.TimeIn.Month == month);
+
+            var workingDaysForEmployee = new List<WorkingDayDto>();
+
+            foreach (var workDay in workingDays)
+                workingDaysForEmployee.Add(this.ConvertoToDto(workDay));
+
+            return workingDaysForEmployee;
+        }
+
+        public int GetHoursWorked(int employeeId, int year, int month)
+        {
+            var workingDays = _workingDayRepository
+                              .Set()
+                              .Where(w => w.EmployeeID == employeeId && 
+                                          w.TimeIn.Year == year &&
+                                          w.TimeIn.Month == month);
+
+            int totalHours = 0;
+
+            foreach (var workingDay in workingDays)
+            {
+                if (workingDay.WorkedHours != null)
+                {
+                    totalHours += (int)workingDay.WorkedHours;
+                }
+            }
+
+            return totalHours;
+        }
+
+        private WorkingDayDto CreateDto(int workingDayId, int EmployeeId, DateTime TimeIn, DateTime? TimeOut, int? WorkedHours)
+        {
+            var workingDayDto = new WorkingDayDto();
+
+            workingDayDto.WorkingDayID = workingDayId;
+            workingDayDto.EmployeeID = EmployeeId;
+            workingDayDto.TimeIn = TimeIn;
+            workingDayDto.TimeOut = TimeOut;
+            workingDayDto.WorkedHours = WorkedHours;
+
+            return workingDayDto;
+        }
+        private WorkingDayDto ConvertoToDto(WorkingDay wd)
+        {
+            return this.CreateDto(wd.WorkingDayID, wd.EmployeeID, wd.TimeIn, wd.TimeOut, wd.WorkedHours);
         }
     }
 }

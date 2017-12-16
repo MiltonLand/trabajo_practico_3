@@ -43,7 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CountryService.cs" />
-    <Compile Include="Dtos\EmployeesWorkig.cs" />
+    <Compile Include="Dtos\EmployeeWorkDay.cs" />
+    <Compile Include="Dtos\SalaryInfo.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="Dtos\CountryDto.cs" />
     <Compile Include="Dtos\EmployeesDto.cs" />

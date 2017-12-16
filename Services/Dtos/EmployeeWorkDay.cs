@@ -7,7 +7,7 @@ using static Services.Dtos.EmployeeDto;
 
 namespace Services.Dtos
 {
-    public class EmployeesWorkig
+    public class EmployeeWorkDay
     {
         public int? EmployeeID { get; set; }
 

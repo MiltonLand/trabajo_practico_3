@@ -84,6 +84,7 @@ namespace Services
                                     .Set()
                                     .FirstOrDefault(c => c.EmployeeID == employee.EmployeeID));
         }
+
         public void Delete(int employeeId)
         {
             this.DeleteFromDatabase(_employeeRepository
@@ -253,7 +254,7 @@ namespace Services
             return (hourlyWage > 0);
         }
 
-        public List<EmployeesWorkig> GetEmployeeShift(Shifts shift)
+        public List<EmployeeWorkDay> GetEmployeeShift(Shifts shift)
         {
             var workingDayServices = new WorkingDayService();
             var wor = workingDayServices.GetAllForEmp();
@@ -266,7 +267,7 @@ namespace Services
                                   (e, w) => new { EmployeeDto = e, WorkingDayDto = w })
                                   .SelectMany(
                                    ews => ews.WorkingDayDto.DefaultIfEmpty(),
-                                   (x, y) => new EmployeesWorkig
+                                   (x, y) => new EmployeeWorkDay
                                    {
                                        EmployeeID = x.EmployeeDto.EmployeeID,
                                        WorkingDayID = y == null ? 0 : y.WorkingDayID,
@@ -277,9 +278,22 @@ namespace Services
                                        WorkedHours = y == null ? 0 : y.WorkedHours,
                                        Shift = x.EmployeeDto.Shift
                                    }).ToList();
-
-
+            
             return empWor;
+        }
+
+        public decimal Salary(int id, int year, int month)
+        {
+            var employee = _employeeRepository.Set().FirstOrDefault(e => e.EmployeeID == id);
+
+            if (employee == null)
+                return 0;
+
+            var wdService = new WorkingDayService();
+
+            var hoursWorked = wdService.GetHoursWorked(id, year, month);
+
+            return hoursWorked * employee.HourlyWage;
         }
     }
 }
