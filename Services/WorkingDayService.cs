@@ -46,8 +46,8 @@ namespace Services
             if (workigDay == null)
                 return;
 
-            workigDay.EmployeeID = workingDayDto.EmployeeID;
-            workigDay.TimeIn = workingDayDto.TimeIn;            
+            workigDay.WorkingDayID = workingDayDto.WorkingDayID;
+            workigDay.EmployeeID = workingDayDto.EmployeeID;            
             workigDay.TimeOut = workingDayDto.TimeOut;
             workigDay.HoursWorked = workingDayDto.HoursWorked;
 
