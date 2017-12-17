@@ -28,9 +28,8 @@
                 @Html.DisplayName(country.CountryName)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new Services.Dtos.CountryDto { CountryID=country.CountryID, CountryName =country.CountryName}) @*{ id = country.CountryID }) |*@
-                 / 
-                @Html.ActionLink("Borrar", "Delete", new Services.Dtos.CountryDto { CountryID = country.CountryID, CountryName = country.CountryName}) @*{ id = country.CountryID }) |*@
+                @Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = country.CountryID })
             </td>
         </tr>
 

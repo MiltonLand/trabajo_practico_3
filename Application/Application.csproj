@@ -337,6 +337,8 @@
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Salary\Show.cshtml" />
     <Content Include="Views\Salary\Index.cshtml" />
+    <Content Include="Views\Country\Delete.cshtml" />
+    <Content Include="Views\Country\CannotDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

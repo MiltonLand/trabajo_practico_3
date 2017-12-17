@@ -8,9 +8,11 @@
 
 
 <form action="/employees/creation" method="post" class="validate-form">
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h6>Por favor asegúrese de completar todos los campos en forma correcta y luego haga click en "CREAR" para confirmar</h6>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

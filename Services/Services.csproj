@@ -43,11 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CountryService.cs" />
-    <Compile Include="Dtos\EmployeeWorkDay.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="Dtos\CountryDto.cs" />
     <Compile Include="Dtos\EmployeesDto.cs" />
     <Compile Include="Dtos\WorkingDayDto.cs" />
+    <Compile Include="Dtos\EmployeeWorkDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkingDayService.cs" />
   </ItemGroup>

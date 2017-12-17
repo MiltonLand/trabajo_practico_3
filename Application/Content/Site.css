@@ -64,7 +64,7 @@ nav {
     transition: 0.5s;
     color: #ffffff;
     font-size: 20px;
-    text-decoration: none;
+    text-decoration: solid;
     padding: 0px 20px;
     margin: 0px -2px;
 }

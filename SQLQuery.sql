@@ -1,3 +1,5 @@
+use [DBTP3]
+
 insert into Country( CountryName) values ('Argentina');
 
 insert into Country( CountryName) values ('Brazil');

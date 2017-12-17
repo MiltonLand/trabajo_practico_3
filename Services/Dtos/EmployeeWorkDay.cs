@@ -9,6 +9,15 @@ namespace Services.Dtos
 {
     public class EmployeeWorkDay
     {
+        /*
+        public enum Shifts
+        {
+            FirstShift,
+            SecondShift,
+            ThirdShift
+        }
+        */
+
         public int? EmployeeID { get; set; }
 
         public int? WorkingDayID { get; set; }

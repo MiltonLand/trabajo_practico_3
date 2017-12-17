@@ -72,7 +72,7 @@ namespace Application.Controllers
             var countryToUpdate = services.Read((int)countryID);
             if (countryToUpdate == null)
             {
-                return HttpNotFound("SOS UN PELOTUDO NO EXISTE LA PÁGINA!");
+                return HttpNotFound("Lá página solicitada no existe!!!");
             }
 
             
@@ -86,7 +86,32 @@ namespace Application.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View();// new CountryService().GetAll());
+        }
+
+        [HttpPost]
+        public ActionResult Creation(string Name)
+        {
+            var countryService = new CountryService();
+
+            countryService.Create(Name);
+
+            return View("Index", countryService.GetAll());
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return View(new CountryService().Read(id));
+        }
+
+        [HttpPost]
+        public ActionResult Deletion(int id)
+        {
+            var countryService = new CountryService();
+
+            countryService.Delete(id);
+
+            return View("Index", countryService.GetAll());
         }
     }
 }
