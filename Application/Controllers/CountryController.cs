@@ -56,10 +56,10 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(CountryDto country)//int? countryID)
+        public ActionResult Edit(int? id)//(CountryDto country)
         {
 
-            int? countryID = country.CountryID;
+            int? countryID = id;//country.CountryID;
 
             if (countryID == null)
             {
@@ -101,6 +101,20 @@ namespace Application.Controllers
 
         public ActionResult Delete(int id)
         {
+            var countryService = new CountryService();
+
+            if(!countryService.CheckHasEmployees(id))
+            {
+                
+                return View(new CountryService().Read(id));
+            }
+            
+            return View("CannotDelete", new CountryService().Read(id));
+        }
+
+        public ActionResult CannotDelete(int id)
+        {
+
             return View(new CountryService().Read(id));
         }
 

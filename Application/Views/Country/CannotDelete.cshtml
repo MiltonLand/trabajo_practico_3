@@ -1,11 +1,11 @@
 ﻿@model Services.Dtos.CountryDto
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "CannotDelete";
 }
 
 
-<h2>¿Borrar País?</h2>
+<h2>" @Model.CountryName " no se puede eliminar!</h2>
 
 <br />
 
@@ -16,7 +16,7 @@
                 <label>Campo</label>
             </th>
             <th class="">
-                <label>Empleado</label>
+                <label>Detalle / Valor</label>
             </th>
         </tr>
 
@@ -40,18 +40,21 @@
         </tr>
         
     </table>
+    <br />
+    <h5><label>Imposible borrar el País ya que posee Empleados relacionados.</label></h5>
 </div>
 <br />
 
-<form action="/country/deletion" method="post">
+<form action="/country/index" method="post">
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input hidden value="@Model.CountryID" name="id" />
-            <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
-            <button type="submit" class="btn accept btn-side-margin btn-glow">Aceptar</button>
+            <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Volver</a>
         </div>
     </div>
 
 </form>
-
+<br />
+<br />
+<br />

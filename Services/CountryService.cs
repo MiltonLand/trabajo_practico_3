@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Services.Dtos;
 
+
 namespace Services
 {
     public class CountryService
     {
         private Repository<Country> _countryRepository;
+
+        private Repository<Employee> _employeeRepository;
 
         public CountryService()
         {
@@ -119,6 +122,19 @@ namespace Services
 
             this.DeleteFromDatabase(country);
         }
+
+        public bool CheckHasEmployees(int id)
+        {
+            var _employeeRepository = new Repository<Employee>();
+
+            var hasEmployee = _employeeRepository 
+                 .Set()
+                 .Where(e => e.CountryID==id)
+                 .Any();
+
+            return hasEmployee;
+        }
+
         public void Delete(string countryName)
         {
             var country = GetCountry(countryName);
