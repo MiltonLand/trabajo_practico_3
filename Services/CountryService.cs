@@ -13,8 +13,6 @@ namespace Services
     {
         private Repository<Country> _countryRepository;
 
-        private Repository<Employee> _employeeRepository;
-
         public CountryService()
         {
             _countryRepository = new Repository<Country>();

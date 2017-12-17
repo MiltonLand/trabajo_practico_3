@@ -71,21 +71,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="reset" class="btn cancel btn-side-margin btn-glow">Cancelar</button>
+                <button type="reset" class="btn cancel btn-side-margin btn-glow" onclick="location.href='@Url.Action("Index", "Employees")'">Cancelar</button>
                 <button type="submit" class="btn accept btn-side-margin btn-glow">Crear</button>
             </div>
         </div>
     </div>
 </form>
 
-<div>
-    @Html.ActionLink("Volver", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
 }
-<br />
-<br />
-<br />

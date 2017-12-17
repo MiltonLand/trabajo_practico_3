@@ -87,7 +87,7 @@
                 @if (@Model.Item1.HiringDate != null)
                 {
                     var hiringDate = (DateTime)Model.Item1.HiringDate;
-                    <input required value="@hiringDate.ToString("dd/MM/yyyy")" class="datepicker btn right-margin date-lt-today" name="hiringDate">
+                    <input required value="@hiringDate.ToString("MM/dd/yyyy")" class="datepicker btn right-margin date-lt-today" name="hiringDate">
                 }
                 else
                 {

@@ -52,7 +52,10 @@
 </div>
 
 <div>
-    @Html.ActionLink("Volver", "Index", "Salary", new { id = Model.Item1.EmployeeID }, null)
+    @Html.ActionLink("Seleccionar otro mes", "Index", "Salary", new { id = Model.Item1.EmployeeID }, null)
+    <br />
+    <br />
+    @Html.ActionLink("Volver al índice", "Index", "Employees", new { id = Model.Item1.EmployeeID }, null)
 </div>
 <br />
 <br />

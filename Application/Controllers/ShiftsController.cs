@@ -16,15 +16,14 @@ namespace Application.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult GetEmployees(String shift)
         {
-
-            ViewBag.SelectedShift = shift;
             var employeeService = new EmployeeService();
             
             var list = employeeService.GetEmployeeShift(employeeService.StringToShift(shift));
+            HttpContext.Application["EditId"] = -1;
 
             return View("SelectShift", list);
         }
@@ -52,7 +51,7 @@ namespace Application.Controllers
                 ViewBag.TimeOut = true;
             }
 
-            ViewBag.EditId = employee.EmployeeID;
+            HttpContext.Application["EditId"] = employee.EmployeeID;
 
             var employeeService = new EmployeeService();
 
@@ -62,53 +61,61 @@ namespace Application.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRow(string hour)
+        public ActionResult AddRow(int employeeId, int hours, int minutes, Shifts shift)
         {
             var workingDayServices = new WorkingDayService();
-
-            int hourP = Int32.Parse(hour);
-            DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hourP, 0, 0 );
             
+            DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 
+                                             DateTime.Now.Day, hours, minutes, 0 );
 
-
-            var workingDayDto = new WorkingDayDto
+            var workingDayDto = new WorkingDayDto()
             {
-                EmployeeID = Int32.Parse(Convert.ToString(Session["EmployeeID"])),
+                EmployeeID = employeeId,
                 TimeIn = dateTime
             };
 
             workingDayServices.Create(workingDayDto);
 
-            return View("SelectShift");
+            ViewBag.JustCreated = true;
+
+            var employeeService = new EmployeeService();
+
+            var list = employeeService.GetEmployeeShift(shift);
+
+            return View("SelectShift", list);
         }
 
         [HttpPost]
-        public ActionResult UpdateRow(string hour)
+        public ActionResult UpdateRow(int employeeId, int hours, int minutes, Shifts shift)
         {
             var workingDayServices = new WorkingDayService();
+            
+            DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 
+                                             DateTime.Now.Day, hours, minutes, 0);
 
-            int hourP = Int32.Parse(hour);
-            DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hourP, 0, 0);
+            var hoursWorked = dateTime.Hour - Decimal.Parse(Convert.ToString(Session["TimeIn"]));
 
-            var hourWorked = dateTime.Hour - Decimal.Parse(Convert.ToString(Session["TimeIn"]));
-
-            if(hourWorked <= 0)
+            if(hoursWorked <= 0)
             {
-                hourWorked = 0.1m;
+                hoursWorked = 0.1m;
             }
 
 
             var workingDayDto = new WorkingDayDto
             {
                 WorkingDayID = Int32.Parse(Convert.ToString(Session["WorkingDayID"])),
-                EmployeeID = Int32.Parse(Convert.ToString(Session["EmployeeID"])),
+                EmployeeID = employeeId,
                 TimeOut = dateTime,
-                HoursWorked = hourWorked
+                HoursWorked = hoursWorked
             };
 
             workingDayServices.Update(workingDayDto);
 
-            return View("SelectShift");
+            var employeeService = new EmployeeService();
+
+            var list = employeeService.GetEmployeeShift(shift);
+
+            return View("SelectShift", list);
         }
         
     }

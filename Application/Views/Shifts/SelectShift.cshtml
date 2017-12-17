@@ -34,10 +34,10 @@
 
 @if (Model != null)
 {
-    <table class="table">
+    <table class="table table-hover">
         <tr>
             <th>
-                @Html.DisplayName("Turno")
+                @Html.DisplayName("Id")
             </th>
             <th>
                 @Html.DisplayName("Nombre")
@@ -45,13 +45,13 @@
             <th>
                 @Html.DisplayName("Apellido")
             </th>
-            <th>
-                @Html.DisplayName("Horario de ingreso")
+            <th class="text-center">
+                <label>Horario de ingreso (@DateTime.Today.ToString("dd/MM"))</label>
             </th>
-            <th>
-                @Html.DisplayName("Horario de salida")
+            <th class="text-center">
+                <label>Horario de salida (@DateTime.Today.ToString("dd/MM"))</label>
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayName("Horas Trabajadas")
             </th>
             <th>
@@ -63,7 +63,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(e => employee.Shift)
+                    @Html.DisplayFor(e => employee.EmployeeID)
                 </td>
 
                 <td>
@@ -74,39 +74,90 @@
                     @Html.DisplayFor(e => employee.LastName)
                 </td>
 
-                <td>
-                    @if (ViewBag.NewRow == true)
+                <td class="text-center">
+                    @if ((employee.TimeIn == null) && ((int)HttpContext.Current.Application["EditId"] == employee.EmployeeID))
                     {
-                        if ((int)ViewBag.EditId == employee.EmployeeID)
+                        using (Html.BeginForm("AddRow", "Shifts", FormMethod.Post))
                         {
-                            using (Html.BeginForm("AddRow", "Shifts", FormMethod.Post))
-                            {
+                            <div class="form-inline">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <input required type="number" min="0" max="23" name="hour" placeholder="Horas" />
-                                <input required type="number" min="0" max="59" name="" placeholder="Minutos" />
+                                <input hidden value="@employee.EmployeeID" name="employeeId" />
+                                <span>Hora: </span>
+                                <input required type="number" min="0" max="23" name="hours" value="0" placeholder="Horas" class="form-control col-xs-2" />
+                                <span>Minutos: </span>
+                                <input required type="number" min="0" max="59" name="minutes" value="0" placeholder="Minutos" class="form-control col-xm-2" />
+                                <input hidden value="@employee.Shift" name="shift" />
                                 <button type="submit" class="btn btn-default accept">OK</button>
-                            }
+                            </div>
+
                         }
+                    }
+                    else if (employee.TimeIn != null)
+                    {
+                        <label>@(((DateTime)employee.TimeIn).ToString("HH:mm"))</label>
                     }
                     else
                     {
-                        @Html.DisplayFor(e => employee.TimeIn)
+                        <span>-</span>
                     }
                 </td>
 
-                <td>
-                    @Html.DisplayFor(e => employee.TimeOut)
+                <td class="text-center">
+                    @if ((employee.TimeIn != null) &&
+                        (employee.TimeOut == null) &&
+                        ((int)HttpContext.Current.Application["EditId"] == employee.EmployeeID))
+                    {
+                        if (ViewBag.JustCreated == null)
+                        {
+                            using (Html.BeginForm("UpdateRow", "Shifts", FormMethod.Post))
+                            {
+                                <div class="form-inline">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <input hidden value="@employee.EmployeeID" name="employeeId" />
+                                    <span>Hora: </span>
+                                    <input required type="number" min="0" max="23" name="hours" value="0"class="form-control col-xm-2" />
+                                    <span>Minutos: </span>
+                                    <input required type="number" min="0" max="59" name="minutes" value="0" class="form-control col-xm-2" />
+                                    <input hidden value="@employee.Shift" name="shift" />
+                                    <button type="submit" class="btn btn-default accept">OK</button>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    }
+                    else if (employee.TimeOut != null)
+                    {
+                    <label>@(((DateTime)employee.TimeOut).ToString("HH:mm"))</label>
+                    }
+                    else
+                    {
+                    <span>-</span>
+                    }
                 </td>
-                <td>
-                    @Html.DisplayFor(e => employee.HoursWorked)
+                <td class="text-center">
+                    @if (employee.HoursWorked != null)
+                    {
+                        @Html.DisplayFor(e => employee.HoursWorked)
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
                 </td>
 
+                <td class="text-center">
+                    @if (employee.TimeIn != null && employee.TimeOut != null)
+                    {
+                        <span>-</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Editar", "AddTime", employee, employee.Shift)
+                    }
 
-                <td>
-                   @if (employee.TimeIn == null || employee.TimeOut == null)
-                   {
-                    @Html.ActionLink("Editar", "AddTime", employee, employee.Shift)
-                   }
                 </td>
             </tr>
         }
@@ -114,39 +165,3 @@
     </table>
 
 }
-
-@if (ViewBag.NewRow != true)
-{
-    if (ViewBag.TimeOut == false)
-    {
-        using (Html.BeginForm("UpdateRow", "Shifts", FormMethod.Post))
-        {
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h5>Ingrese el horario</h5>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Horario de salida</label>
-                            <div class="col-md-10">
-                                <input required min="0" max="23" type="number" name="hour" placeholder="Horario" class="form-control name-validation" maxlength="50" />
-                            
-                            </div>
-                        </div>
-
-                        <br>
-                        <button type="submit" class="btn btn-default accept">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-}
-
-
-
-
-
-
