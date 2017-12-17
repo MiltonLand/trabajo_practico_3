@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Services.Dtos.EmployeeDto;
 
 namespace Application.Controllers
 {
@@ -28,7 +29,7 @@ namespace Application.Controllers
             return View("SelectShift", list);
         }
         
-        public ActionResult AddTime(EmployeeWorkDay employee)
+        public ActionResult AddTime(EmployeeWorkDay employee, Shifts shift)
         {
             ViewBag.NewRow = null;
             ViewBag.TimeOut = false;
@@ -36,10 +37,8 @@ namespace Application.Controllers
             Session["WorkingDayID"] = employee.WorkingDayID;
             Session["TimeIn"] = employee.TimeIn.GetValueOrDefault().Hour;
             
-           
             var workingDayServices = new WorkingDayService();
-
-
+            
             if (employee.TimeIn == null)
             {                             
                 ViewBag.NewRow = true;
@@ -53,7 +52,13 @@ namespace Application.Controllers
                 ViewBag.TimeOut = true;
             }
 
-            return View("SelectShift");
+            ViewBag.EditId = employee.EmployeeID;
+
+            var employeeService = new EmployeeService();
+
+            var list = employeeService.GetEmployeeShift(shift);
+
+            return View("SelectShift", list);
         }
 
         [HttpPost]
