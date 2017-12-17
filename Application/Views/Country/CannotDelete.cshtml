@@ -1,11 +1,11 @@
 ﻿@model Services.Dtos.CountryDto
 
 @{
-    ViewBag.Title = "CannotDelete";
+    ViewBag.Title = "No se puede eliminar.";
 }
 
 
-<h2>" @Model.CountryName " no se puede eliminar!</h2>
+<h2>¡@Model.CountryName no se puede eliminar!</h2>
 
 <br />
 
@@ -50,11 +50,8 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input hidden value="@Model.CountryID" name="id" />
-            <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Volver</a>
+            <a href="/country/index">Volver</a>
         </div>
     </div>
 
 </form>
-<br />
-<br />
-<br />

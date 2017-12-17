@@ -7,35 +7,31 @@
 <p>
     @Html.ActionLink("Agregar país", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("País")
-        </th>
-        <th>
-            Acciones
-        </th>
-    </tr>
 
-    @*LISTA DE EJEMPLO. A RELLENAR CON CAMPOS REALES*@
-
-    @*for (int i = 0; i < 5; i++)*@
-    @foreach (var country in Model)
-    {
+<div class="col-sm-6">
+    <table class="table table-hover">
         <tr>
-            <td>
-                @*Html.DisplayName("Argentina")*@
-                @Html.DisplayName(country.CountryName)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |
-                @Html.ActionLink("Borrar", "Delete", new { id = country.CountryID })
-            </td>
+            <th>
+                @Html.DisplayName("País")
+            </th>
+            <th>
+                Acciones
+            </th>
         </tr>
 
-    }
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayName(country.CountryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = country.CountryID })
+                </td>
+            </tr>
 
-</table>
-<br />
-<br />
-<br />
+        }
+
+    </table>
+</div>
