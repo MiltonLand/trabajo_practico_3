@@ -4,13 +4,11 @@
     ViewBag.Title = "Editar país";
 }
 
-<h2>Editar país</h2>
-
-
 <form action="/country/update" method="post" class="validate-form">
     @Html.AntiForgeryToken()
 
     <div class="jumbotron">
+        <h2>Editar país "@Model.CountryName"</h2>
         <div class="form-horizontal">
             <h6>Por favor ingrese el nuevo valor para cada campo que quiera modificar</h6>
             <hr />

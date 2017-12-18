@@ -5,11 +5,10 @@
 }
 
 
-<h2>¡@Model.CountryName no se puede eliminar!</h2>
-
 <br />
 
 <div class="jumbotron">
+    <h2 class="text-muted">¡"@Model.CountryName" no se puede eliminar!</h2>
     <div class="col-sm-6">
         <table class="table table-hover">
             <tr>
@@ -44,7 +43,6 @@
         <br />
         <h5><label>Imposible borrar el País ya que posee Empleados relacionados.</label></h5>
     </div>
-</div>
 
     <br />
 
@@ -53,8 +51,14 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input hidden value="@Model.CountryID" name="id" />
-                <a href="/country/index">Volver</a>
+                <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Volver</a>
             </div>
         </div>
 
     </form>
+
+</div>
+
+    
+
+    

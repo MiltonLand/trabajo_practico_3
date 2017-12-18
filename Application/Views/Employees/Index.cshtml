@@ -13,26 +13,28 @@
     <h2>Listado de personal</h2>
     <br />
     <table class="table table-hover ">
-        <tr>
+        <tr class="text-info2">
             <th>
-                <label>País</label>
+                <h5><label>País</label></h5>
             </th>
             <th>
-                <label>Turno</label>
+                <h5><label>Turno</label></h5>
             </th>
             <th>
-                <label>Nombre</label>
+                <h5><label>Nombre</label></h5>
             </th>
             <th>
-                <label>Apellido</label>
+                <h5><label>Apellido</label></h5>
             </th>
             <th>
-                <label>Fecha de ingreso</label>
+                <h5><label>Fecha de ingreso</label></h5>
             </th>
             <th>
-                <label>Valor de la hora</label>
+                <h5><label>Valor de la hora</label></h5>
             </th>
-            <th></th>
+            <th>
+                <h5><label>Acciones</label></h5>
+            </th>
         </tr>
 
         @foreach (var employee in Model)
@@ -84,7 +86,7 @@
                 <td>
                     @Html.ActionLink("Ver salarios", "Index", "Salary", new { id = employee.EmployeeID }, null) |
                     @Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = employee.EmployeeID })
                 </td>
             </tr>
         }

@@ -20,7 +20,7 @@ body {
         background: center;
         background-repeat: no-repeat;
         content: "";
-        opacity: 0.9;
+        opacity: 0.5;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -156,7 +156,7 @@ a:hover {
 
 .jumbotron {
     padding: 50px;
-    background-color: rgba(53, 76, 122, 0.8);
+    background-color: rgba(53, 76, 122, 0.95);
     opacity: 1;
 }
 

@@ -10,14 +10,15 @@
 </p>
 
 <div class="jumbotron">
+    <h2>Listado de países</h2>
     <div class="col-sm-6">
         <table class="table table-hover">
-            <tr>
+            <tr class="text-info2">
                 <th>
-                    @Html.DisplayName("País")
+                    <h5>@Html.DisplayName("País")</h5>
                 </th>
                 <th>
-                    Acciones
+                    <h5>Acciones</h5>
                 </th>
             </tr>
 
@@ -28,8 +29,8 @@
                         @Html.DisplayName(country.CountryName)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |
-                        @Html.ActionLink("Borrar", "Delete", new { id = country.CountryID })
+                        <bold>@Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |</bold>
+                        <bold>@Html.ActionLink("Eliminar", "Delete", new { id = country.CountryID })</bold>
                     </td>
                 </tr>
 
