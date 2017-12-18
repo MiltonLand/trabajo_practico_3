@@ -31,34 +31,25 @@
 </div>
 
 <div id="bottomdiv" class="row">
-    <div class="col-md-4">
+    <div class="jumbotron col-md-4">
+        <h2>Administrar Horarios</h2>
+        <p>
+            Comience a controlar el horario de entrada y salida de su personal de una manera simple y eficaz.
+        </p>
+        <p><a class="btn btn-default" href="/shifts/selectshift">Ingresar Horarios...&raquo;</a></p>
+    </div>
 
-        <div class="jumbotron">
-            <h2>Administrar Horarios</h2>
-            <p>
-                Comience a controlar el horario de entrada y salida de su personal de una manera simple y eficaz.
-            </p>
-            <p><a class="btn btn-default" href="/shifts/selectshift">Ingresar Horarios...&raquo;</a></p>
-        </div>
+    <div class="jumbotron col-md-4">
+        <h2>Administrar Empleados</h2>
+        <p>De de alta nuevos empleados, actualice y controle su información. Compruebe cuanto ganan sus empleados cada mes.</p>
+        <p><a class="btn btn-default" href="/employees/index">Empleados... &raquo;</a></p>
 
     </div>
-    <div class="col-md-4">
 
-        <div class="jumbotron">
-            <h2>Administrar Empleados</h2>
-            <p>De de alta nuevos empleados, actualice y controle su información. Compruebe cuanto ganan sus empleados cada mes.</p>
-            <p><a class="btn btn-default" href="/employees/index">Empleados... &raquo;</a></p>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-
-        <div class="jumbotron">
-            <h2>Administrar Países</h2>
-            <p>Cree, modifique y elimine países que corresponden a cada miembro de su personal.</p>
-            <p><a class="btn btn-default" href="/country/index">Países... &raquo;</a></p>
-        </div>
-
+    <div class="jumbotron col-md-4">
+        <h2>Administrar Países</h2>
+        <p>Cree, modifique y elimine países que corresponden a cada miembro de su personal.</p>
+        <p><a class="btn btn-default" href="/country/index">Países... &raquo;</a></p>
     </div>
 </div>
 <br />
@@ -79,6 +70,21 @@
         $("#test").fadeIn(3000);
     }
 </script>
+
+<style>
+    body {
+        background: url('../Images/home-background.jpg') no-repeat center center fixed !important;
+        background-repeat: no-repeat;
+    }
+
+    .jumbotron {
+        background-color: rgba(0, 0, 0, 0.50);
+    }
+
+    #click {
+        cursor: pointer;
+    }
+</style>
 
 <script>
     //funcion que se agrega al botón en el index para hacer un scroll de pantalla hacia las opciones que están abajo en el index

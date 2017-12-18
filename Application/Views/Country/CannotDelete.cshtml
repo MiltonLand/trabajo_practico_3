@@ -5,46 +5,43 @@
 }
 
 
-<h2>¡@Model.CountryName no se puede eliminar!</h2>
-
 <br />
 
-<div class="jumbotron">
-    <div class="col-sm-6">
-        <table class="table table-hover">
-            <tr>
-                <th class="">
-                    <label>Campo</label>
-                </th>
-                <th class="">
-                    <label>Detalle / Valor</label>
-                </th>
-            </tr>
+<div class="jumbotron col-sm-6">
+    <h2 >¡@Model.CountryName no se puede eliminar!</h2>
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th class="">
+                <label>Campo</label>
+            </th>
+            <th class="">
+                <label>Detalle / Valor</label>
+            </th>
+        </tr>
 
-            <tr>
-                <td>
-                    <label>ID: </label>
-                </td>
-                <td>
-                    <label>@Model.CountryID.ToString()</label>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <label>ID: </label>
+            </td>
+            <td>
+                <label>@Model.CountryID.ToString()</label>
+            </td>
+        </tr>
 
 
-            <tr>
-                <td>
-                    <label>Nombre: </label>
-                </td>
-                <td>
-                    <label>@Model.CountryName</label>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <label>Nombre: </label>
+            </td>
+            <td>
+                <label>@Model.CountryName</label>
+            </td>
+        </tr>
 
-        </table>
-        <br />
-        <h5><label>Imposible borrar el País ya que posee Empleados relacionados.</label></h5>
-    </div>
-</div>
+    </table>
+    <br />
+    <h5><label>Imposible borrar el País ya que posee Empleados relacionados.</label></h5>
 
     <br />
 
@@ -53,8 +50,14 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input hidden value="@Model.CountryID" name="id" />
-                <a href="/country/index">Volver</a>
+                <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Volver</a>
             </div>
         </div>
 
     </form>
+</div>
+
+
+    
+
+    

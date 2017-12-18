@@ -20,7 +20,7 @@ body {
         background: center;
         background-repeat: no-repeat;
         content: "";
-        opacity: 0.9;
+        opacity: 0.5;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -161,7 +161,7 @@ a:hover {
 }
 
 .div-footer {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.50);
     border-radius: 25px;
 }
 
@@ -169,11 +169,6 @@ table {
     align-content: center;
     align-items: center;
     margin: 0px!important;
-}
-
-hr {
-    height: 0px;
-
 }
 
 #footer {

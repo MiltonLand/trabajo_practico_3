@@ -26,7 +26,7 @@ namespace Application.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-                return View("Index", new EmployeeService().GetAll());
+                return RedirectToAction("Index");
 
             var employeeService = new EmployeeService();
             var countryService = new CountryService();
@@ -67,9 +67,12 @@ namespace Application.Controllers
             return View("Index", employeeService.GetAll());
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View(new EmployeeService().Read(id));
+            if (id == null)
+                return RedirectToAction("Index");
+
+            return View(new EmployeeService().Read((int)id));
         }
 
         [HttpPost]

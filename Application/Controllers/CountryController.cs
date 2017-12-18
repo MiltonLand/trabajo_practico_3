@@ -99,23 +99,28 @@ namespace Application.Controllers
             return View("Index", countryService.GetAll());
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+                return RedirectToAction("Index");
+
             var countryService = new CountryService();
 
-            if(!countryService.CheckHasEmployees(id))
+            if(!countryService.CheckHasEmployees((int)id))
             {
                 
-                return View(new CountryService().Read(id));
+                return View(new CountryService().Read((int)id));
             }
             
-            return View("CannotDelete", new CountryService().Read(id));
+            return View("CannotDelete", new CountryService().Read((int)id));
         }
 
-        public ActionResult CannotDelete(int id)
+        public ActionResult CannotDelete(int? id)
         {
+            if (id == null)
+                return RedirectToAction("Index");
 
-            return View(new CountryService().Read(id));
+            return View(new CountryService().Read((int)id));
         }
 
         [HttpPost]

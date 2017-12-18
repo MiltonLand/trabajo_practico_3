@@ -5,44 +5,46 @@
 }
 
 
-<h2>¿Eliminar País?</h2>
+
 
 <br />
 
-<div class="jumbotron">
-    <div class="col-sm-6">
-        <table class="table table-hover">
-            <tr>
-                <th class="">
-                    <label>Campo</label>
-                </th>
-                <th class="">
-                    <label>Detalle / Valor</label>
-                </th>
-            </tr>
+<div class="jumbotron col-sm-6">
+    <h2 class="text-danger">¿Eliminar País "@Model.CountryName"?</h2>
+    
+    <br />
 
-            <tr>
-                <td>
-                    <label>ID: </label>
-                </td>
-                <td>
-                    <label>@Model.CountryID.ToString()</label>
-                </td>
-            </tr>
+    <table class="table table-hover">
+        <tr>
+            <th class="">
+                <label>Campo</label>
+            </th>
+            <th class="">
+                <label>Detalle / Valor</label>
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <label>ID: </label>
+            </td>
+            <td>
+                <label>@Model.CountryID.ToString()</label>
+            </td>
+        </tr>
 
 
-            <tr>
-                <td>
-                    <label>Nombre: </label>
-                </td>
-                <td>
-                    <label>@Model.CountryName</label>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <label>Nombre: </label>
+            </td>
+            <td>
+                <label>@Model.CountryName</label>
+            </td>
+        </tr>
 
-        </table>
-    </div>
-</div>
+    </table>
+
     <br />
 
     <form action="/country/deletion" method="post">
@@ -51,8 +53,10 @@
             <div class="col-md-offset-2 col-md-10">
                 <input hidden value="@Model.CountryID" name="id" />
                 <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
-                <button type="submit" class="btn accept btn-side-margin btn-glow">Aceptar</button>
+                <button type="submit" class="btn accept btn-side-margin btn-glow">Eliminar</button>
             </div>
         </div>
 
     </form>
+</div>
+    

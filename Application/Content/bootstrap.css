@@ -446,7 +446,13 @@ cite {
 }
 
 .text-info {
-  color: #3a87ad;
+    /*color: #3a87ad;*/
+    color: #0e2f89;
+}
+
+.text-info2 {
+    /*color: #3a87ad;*/
+    color: #101b5a;
 }
 
 .text-left {

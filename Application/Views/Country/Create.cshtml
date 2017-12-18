@@ -8,7 +8,7 @@
     <div class="jumbotron">
         <h1>Nuevo País</h1>
         <div class="form-horizontal">
-            <h6>Por favor complete el nombre del nuevo País y luego haga click en "CREAR" para confirmar</h6>
+            <h6>Por favor complete el nombre del nuevo país y luego haga click en "CREAR" para confirmar.</h6>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -17,6 +17,8 @@
                     <input required type="text" name="name" placeholder="Nombre" class="form-control name-validation" maxlength="20" />
                 </div>
             </div>
+
+            <br />
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

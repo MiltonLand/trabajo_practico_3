@@ -9,11 +9,14 @@ namespace Application.Controllers
 {
     public class SalaryController : Controller
     {
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
+            if (id == null)
+                return RedirectToAction("Index", "Employees");
+
             var employeeService = new EmployeeService();
 
-            return View(employeeService.Read(id));
+            return View(employeeService.Read((int)id));
         }
 
         [HttpPost]

@@ -5,32 +5,35 @@
     ViewBag.Title = "Ingresar turno";
 }
 
-@using (Html.BeginForm("GetEmployees", "Shifts", FormMethod.Post))
+@if (Model == null)
 {
-    @Html.AntiForgeryToken()
+    using (Html.BeginForm("GetEmployees", "Shifts", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-<div class="jumbotron">
-    <h2>Ingresar horario</h2>
-    <br>
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="jumbotron">
+            <h2>Ingresar horario</h2>
+            <br>
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <div class="col-md-10">
-                <h5>Ingrese el turno</h5>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <h5>Ingrese el turno</h5>
 
-                <select name="shift" class="btn btn-block">
-                    <option @(ViewBag.SelectedShift == "mañana" ? "selected" : "") value="mañana">Mañana</option>
-                    <option @(ViewBag.SelectedShift == "tarde" ? "selected" : "") value="tarde">Tarde</option>
-                    <option @(ViewBag.SelectedShift == "noche" ? "selected" : "") value="noche">Noche</option>
-                </select>
+                        <select name="shift" class="btn btn-block">
+                            <option @(ViewBag.SelectedShift == "mañana" ? "selected" : "") value="mañana">Mañana</option>
+                            <option @(ViewBag.SelectedShift == "tarde" ? "selected" : "") value="tarde">Tarde</option>
+                            <option @(ViewBag.SelectedShift == "noche" ? "selected" : "") value="noche">Noche</option>
+                        </select>
 
-                <br>
-                <button type="submit" class="btn btn-default accept">Aceptar</button>
+                        <br>
+                        <button type="submit" class="btn btn-default accept">Aceptar</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    }
 }
 
 
@@ -166,5 +169,10 @@
             }
 
         </table>
+
+        <br />
+
+        @Html.ActionLink("Elegir otro turno", "SelectShift")
+
         </div>
         }

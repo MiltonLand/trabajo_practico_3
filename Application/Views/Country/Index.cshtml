@@ -9,30 +9,32 @@
     <p><a href="/country/create" id="click" class="btn btn-primary btn-lg">Nuevo país &raquo;</a></p>
 </p>
 
-<div class="jumbotron">
-    <div class="col-sm-6">
-        <table class="table table-hover">
-            <tr>
-                <th>
-                    @Html.DisplayName("País")
-                </th>
-                <th>
-                    Acciones
-                </th>
-            </tr>
+<div class="jumbotron col-sm-6">
+    <h2>Listado de países</h2>
 
-            @foreach (var country in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayName(country.CountryName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |
-                        @Html.ActionLink("Borrar", "Delete", new { id = country.CountryID })
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+    <br />
+
+    <table class="table table-hover">
+        <tr class="text-info2">
+            <th>
+                <h5>@Html.DisplayName("País")</h5>
+            </th>
+            <th>
+                <h5>Acciones</h5>
+            </th>
+        </tr>
+
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayName(country.CountryName)
+                </td>
+                <td>
+                    <bold>@Html.ActionLink("Editar", "Edit", new { id = country.CountryID }) |</bold>
+                    <bold>@Html.ActionLink("Eliminar", "Delete", new { id = country.CountryID })</bold>
+                </td>
+            </tr>
+        }
+    </table>
 </div>

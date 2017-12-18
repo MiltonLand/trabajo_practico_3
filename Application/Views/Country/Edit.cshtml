@@ -4,15 +4,13 @@
     ViewBag.Title = "Editar país";
 }
 
-<h2>Editar país</h2>
-
-
 <form action="/country/update" method="post" class="validate-form">
     @Html.AntiForgeryToken()
 
     <div class="jumbotron">
+        <h2>Editar país "@Model.CountryName"</h2>
         <div class="form-horizontal">
-            <h6>Por favor ingrese el nuevo valor para cada campo que quiera modificar</h6>
+            <h6>Por favor ingrese el nuevo valor para cada campo que quiera modificar.</h6>
             <hr />
 
             <div class="form-group">
@@ -23,18 +21,19 @@
                     @Html.HiddenFor(model => model.CountryID)
 
                     <br />
-
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
-                    <button type="reset" class="btn btn-default cancel">Resetear</button>
-                    <button type="submit" class="btn btn-default accept">Guardar cambios</button>
-                </div>
-            </div>
-
         </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
+                <button type="reset" class="btn btn-default cancel">Resetear</button>
+                <button type="submit" class="btn btn-default accept">Guardar cambios</button>
+            </div>
+        </div>
+
     </div>
+
+
 </form>
