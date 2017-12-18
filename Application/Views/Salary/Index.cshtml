@@ -21,57 +21,59 @@
 
     <input hidden name="id" value="@Model.EmployeeID"/>
 
-    <div class="form-horizontal">
-        <hr />
+    <div class="jumbotron">
+        <div class="form-horizontal">
+            <hr />
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Año</label>
-            <div class="col-md-10">
-                <select onchange="ShowMonths(this, 
-                                             @hiringDate.Year, 
-                                             @hiringDate.Month, 
-                                             @thisYear, 
+            <div class="form-group">
+                <label class="control-label col-md-2">Año</label>
+                <div class="col-md-10">
+                    <select onchange="ShowMonths(this,
+                                             @hiringDate.Year,
+                                             @hiringDate.Month,
+                                             @thisYear,
                                              @thisMonth);"
-                        name="year" class="btn btn-block">
-                    @{
-                        for (int year = hiringDate.Year; year <= thisYear; year++)
-                        {
+                            name="year" class="btn btn-block">
+                        @{
+                            for (int year = hiringDate.Year; year <= thisYear; year++)
+                            {
                                 <option value="@year">@year</option>
+                            }
+
                         }
 
-                    }
 
-
-                </select>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Mes</label>
-            <div class="col-md-10">
-                <select id="month-selection" name="month" class="btn btn-block">
-                    @{
-                        int lastMonth = 12;
+            <div class="form-group">
+                <label class="control-label col-md-2">Mes</label>
+                <div class="col-md-10">
+                    <select id="month-selection" name="month" class="btn btn-block">
+                        @{
+                            int lastMonth = 12;
 
-                        if (thisYear == DateTime.Today.Year)
-                        {
-                            lastMonth = DateTime.Today.Month;
+                            if (thisYear == DateTime.Today.Year)
+                            {
+                                lastMonth = DateTime.Today.Month;
+                            }
+
+                            for (int month = hiringDate.Month; month <= thisMonth; month++)
+                            {
+                                <option value="@month">@months[month - 1]</option>
+                            }
+
                         }
-
-                        for (int month = hiringDate.Month; month <= thisMonth; month++)
-                        {
-                            <option value="@month">@months[month - 1]</option>
-                        }
-
-                    }
-                </select>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <a href="/employees/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
-                <button type="submit" class="btn accept btn-side-margin btn-glow">Ver salario</button>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="/employees/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
+                    <button type="submit" class="btn accept btn-side-margin btn-glow">Ver salario</button>
+                </div>
             </div>
         </div>
     </div>

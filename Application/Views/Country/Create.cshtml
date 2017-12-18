@@ -2,13 +2,11 @@
     ViewBag.Title = "Nuevo país";
 }
 
-<h1>Nuevo País</h1>
-
-
 <form action="/country/creation" method="post" class="validate-form">
 
         @Html.AntiForgeryToken()
-
+    <div class="jumbotron">
+        <h1>Nuevo País</h1>
         <div class="form-horizontal">
             <h6>Por favor complete el nombre del nuevo País y luego haga click en "CREAR" para confirmar</h6>
             <hr />
@@ -27,4 +25,5 @@
                 </div>
             </div>
         </div>
-    </form>
+     </div>
+</form>

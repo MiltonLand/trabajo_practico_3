@@ -1,31 +1,92 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Página principal";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div align="center">
+        <h3 class="text-center" align="center">ADMINISTRADOR DE PERSONAL Y HORARIOS DE TRABAJO</h3>
+        <br />
+        <p class="lead text-success" style="font-size:20px"><strong>Bienvenido</strong></p>
+
+        <div class="row">
+            <div class="col-md-12">
+
+            </div>
+
+            <div id="test" align="center" class="col-md-12">
+                <img src="~/images/employees-meeting.png" class="one" width="620" height="420" />
+                @*<img src="~/Content/images/employee-phone.png" class="two" width="380" height="380"/>*@
+            </div>
+
+
+        </div>
+
+        <br />
+        <br />
+
+        <p class="lead"><big>Comience a utilizar ya mismo nuestra herramienta.</big></p>
+        <p class="lead"><small>Fácil de usar y resultados instantáneos.</small></p>
+        <p><a id="click" class="btn btn-primary btn-lg">Comenzar &raquo;</a></p>
+    </div>
 </div>
 
-<div class="row">
+<div id="bottomdiv" class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+        <div class="jumbotron">
+            <h2>Administrar Horarios</h2>
+            <p>
+                Comience a controlar el horario de entrada y salida de su personal de una manera simple y eficaz.
+            </p>
+            <p><a class="btn btn-default" href="/shifts/selectshift">Ingresar Horarios...&raquo;</a></p>
+        </div>
+
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+        <div class="jumbotron">
+            <h2>Administrar Empleados</h2>
+            <p>De de alta nuevos empleados, actualice y controle su información. Compruebe cuanto ganan sus empleados cada mes.</p>
+            <p><a class="btn btn-default" href="/employees/index">Empleados... &raquo;</a></p>
+        </div>
+
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+        <div class="jumbotron">
+            <h2>Administrar Países</h2>
+            <p>Cree, modifique y elimine países que corresponden a cada miembro de su personal.</p>
+            <p><a class="btn btn-default" href="/country/index">Países... &raquo;</a></p>
+        </div>
+
     </div>
 </div>
+<br />
+<br />
+<br />
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script>
+
+    //document.onload(fadeinpics());
+    $(document).onload(fadeinpics());
+    $(document).onload(fadeFunc());
+
+    function fadeinpics() {
+        //al cargar el index se oculta la imagen automáticamente y luego se muestra lentamente (fadeIn)
+        $("#test").fadeOut(0);
+        //$("#test").hide("slow");
+        $("#test").fadeIn(3000);
+    }
+</script>
+
+<script>
+    //funcion que se agrega al botón en el index para hacer un scroll de pantalla hacia las opciones que están abajo en el index
+    $(document).ready(function () {
+        $("#click").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#bottomdiv").offset().top
+            }, 1000);
+        });
+    });
+</script>

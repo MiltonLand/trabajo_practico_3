@@ -4,75 +4,75 @@
     ViewBag.Title = "Crear";
 }
 
-<h2>Crear empleado</h2>
-
-
 <form action="/employees/creation" method="post" class="validate-form">
 
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h6>Por favor asegúrese de completar todos los campos en forma correcta y luego haga click en "CREAR" para confirmar</h6>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <label class="control-label col-md-2">Nombre</label>
-            <div class="col-md-10">
-                <input required type="text" name="fName" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+    <div class="jumbotron">
+        <h2>Crear empleado</h2>
+        <div class="form-horizontal">
+            <h6>Por favor asegúrese de completar todos los campos en forma correcta y luego haga click en "CREAR" para confirmar</h6>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Nombre</label>
+                <div class="col-md-10">
+                    <input required type="text" name="fName" placeholder="Nombre" class="form-control name-validation" maxlength="50" />
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Apellido</label>
-            <div class="col-md-10">
-                <input required type="text" name="lName" placeholder="Apellido" class="form-control name-validation" maxlength="50" />
+            <div class="form-group">
+                <label class="control-label col-md-2">Apellido</label>
+                <div class="col-md-10">
+                    <input required type="text" name="lName" placeholder="Apellido" class="form-control name-validation" maxlength="50" />
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">País</label>
-            <div class="col-md-10">
-                <select name="country" class="btn btn-block">
-                    @foreach (var p in Model)
-                    {
-                        <option value="@p.CountryName">@p.CountryName</option>
-                    }
-                </select>
+            <div class="form-group">
+                <label class="control-label col-md-2">País</label>
+                <div class="col-md-10">
+                    <select name="country" class="btn btn-block">
+                        @foreach (var p in Model)
+                        {
+                            <option value="@p.CountryName">@p.CountryName</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Turno</label>
-            <div class="col-md-10">
+            <div class="form-group">
+                <label class="control-label col-md-2">Turno</label>
+                <div class="col-md-10">
 
-                <select name="shift" class="btn btn-block">
-                    <option value="Mañana">Mañana</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Noche">Noche</option>
-                </select>
+                    <select name="shift" class="btn btn-block">
+                        <option value="Mañana">Mañana</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noche">Noche</option>
+                    </select>
 
+                </div>
             </div>
-        </div>
 
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Fecha de ingreso</label>
-            <div class="col-md-10">
-                <input required class="datepicker btn right-margin" name="hiringDate">
+            <div class="form-group">
+                <label class="control-label col-md-2">Fecha de ingreso</label>
+                <div class="col-md-10">
+                    <input required class="datepicker btn right-margin" name="hiringDate">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Valor de la hora</label>
-            <div class="col-md-10">
-                <input required class="number-validation decimal-validation btn right-margin" name="hourlyWage">
+            <div class="form-group">
+                <label class="control-label col-md-2">Valor de la hora</label>
+                <div class="col-md-10">
+                    <input required class="number-validation decimal-validation btn right-margin" name="hourlyWage">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <a href="/employees/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
-                <button type="submit" class="btn accept btn-side-margin btn-glow">Crear</button>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="/employees/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
+                    <button type="submit" class="btn accept btn-side-margin btn-glow">Crear</button>
+                </div>
             </div>
         </div>
     </div>

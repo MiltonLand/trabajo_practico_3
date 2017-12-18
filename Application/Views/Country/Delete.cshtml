@@ -9,48 +9,50 @@
 
 <br />
 
-<div class="col-sm-6">
-    <table class="table table-hover">
-        <tr>
-            <th class="">
-                <label>Campo</label>
-            </th>
-            <th class="">
-                <label>Detalle / Valor</label>
-            </th>
-        </tr>
+<div class="jumbotron">
+    <div class="col-sm-6">
+        <table class="table table-hover">
+            <tr>
+                <th class="">
+                    <label>Campo</label>
+                </th>
+                <th class="">
+                    <label>Detalle / Valor</label>
+                </th>
+            </tr>
 
-        <tr>
-            <td>
-                <label>ID: </label>
-            </td>
-            <td>
-                <label>@Model.CountryID.ToString()</label>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <label>ID: </label>
+                </td>
+                <td>
+                    <label>@Model.CountryID.ToString()</label>
+                </td>
+            </tr>
 
 
-        <tr>
-            <td>
-                <label>Nombre: </label>
-            </td>
-            <td>
-                <label>@Model.CountryName</label>
-            </td>
-        </tr>
-        
-    </table>
-</div>
-<br />
+            <tr>
+                <td>
+                    <label>Nombre: </label>
+                </td>
+                <td>
+                    <label>@Model.CountryName</label>
+                </td>
+            </tr>
 
-<form action="/country/deletion" method="post">
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input hidden value="@Model.CountryID" name="id" />
-            <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
-            <button type="submit" class="btn accept btn-side-margin btn-glow">Aceptar</button>
-        </div>
+        </table>
     </div>
+</div>
+    <br />
 
-</form>
+    <form action="/country/deletion" method="post">
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input hidden value="@Model.CountryID" name="id" />
+                <a href="/country/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
+                <button type="submit" class="btn accept btn-side-margin btn-glow">Aceptar</button>
+            </div>
+        </div>
+
+    </form>

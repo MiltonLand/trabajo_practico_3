@@ -15,45 +15,47 @@
 
 <br />
 
-<div class="col-sm-6">
-    <table class="table table-hover">
-        <tr>
-            <th>
-                <label>Día</label>
-            </th>
-            <th>
-                <label>Horas trabajadas</label>
-            </th>
-        </tr>
-        @foreach (var workingDay in Model.Item2)
-        {
-        <tr>
-            <th>
-                <span>
-                    @workingDay.TimeIn.ToString("dd/MM")
-                </span>
-            </th>
-            <th>
-                <span>
-                    @workingDay.HoursWorked
-                </span>
-            </th>
-        </tr>
-        }
-        <tr>
-            <td>
-                <span>Total a cobrar: </span>
-            </td>
-            <td>
-                <span>$@ViewBag.Salary</span>
-            </td>
-        </tr>
-    </table>
-</div>
+<div class="jumbotron">
+    <div class="col-sm-6">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    <label>Día</label>
+                </th>
+                <th>
+                    <label>Horas trabajadas</label>
+                </th>
+            </tr>
+            @foreach (var workingDay in Model.Item2)
+            {
+                <tr>
+                    <th>
+                        <span>
+                            @workingDay.TimeIn.ToString("dd/MM")
+                        </span>
+                    </th>
+                    <th>
+                        <span>
+                            @workingDay.HoursWorked
+                        </span>
+                    </th>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <span>Total a cobrar: </span>
+                </td>
+                <td>
+                    <span>$@ViewBag.Salary</span>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-<div>
-    @Html.ActionLink("Seleccionar otro mes", "Index", "Salary", new { id = Model.Item1.EmployeeID }, null)
-    <br />
-    <br />
-    @Html.ActionLink("Volver al índice", "Index", "Employees", new { id = Model.Item1.EmployeeID }, null)
+    <div>
+        @Html.ActionLink("Seleccionar otro mes", "Index", "Salary", new { id = Model.Item1.EmployeeID }, null)
+        <br />
+        <br />
+        @Html.ActionLink("Volver al índice", "Index", "Employees", new { id = Model.Item1.EmployeeID }, null)
+    </div>
 </div>
