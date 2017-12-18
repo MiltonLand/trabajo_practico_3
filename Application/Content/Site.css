@@ -2,6 +2,8 @@
 
 body {
     margin: 0px;
+    background: url('../Images/background.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
 }
 
 nav {
@@ -77,6 +79,7 @@ nav {
     }
 
 .accept {
+    border-radius: 25px;
     background-color: #001435;
     color: white;
     text-decoration: none;
@@ -87,6 +90,7 @@ nav {
 }
 
 .cancel {
+    border-radius: 25px;
     background-color: white;
     color: black;
     text-decoration: none;
@@ -112,4 +116,21 @@ nav {
 
 .right-margin {
     margin-right: 10px;
+}
+
+button, select, option, input{
+    border-radius: 25px!important;
+}
+
+p, table, h1, h2, h3, h4, h5, h6 {
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+a:hover {
+    text-shadow: none!important;
+}
+
+.jumbotron {
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
 }

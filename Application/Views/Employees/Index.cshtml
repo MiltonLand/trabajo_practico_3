@@ -7,81 +7,84 @@
 <p>
     @Html.ActionLink("Nuevo Empleado", "Create")
 </p>
-<table class="table table-hover">
-    <tr>
-        <th>
-            <label>País</label>
-        </th>
-        <th>
-            <label>Turno</label>
-        </th>
-        <th>
-            <label>Nombre</label>
-        </th>
-        <th>
-            <label>Apellido</label>
-        </th>
-        <th>
-            <label>Fecha de ingreso</label>
-        </th>
-        <th>
-            <label>Valor de la hora</label>
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var employee in Model)
-    {
+<div class="jumbotron">
+    <table class="table table-hover ">
         <tr>
-            <td>
-                @Html.DisplayFor(e => employee.Country)
-            </td>
+            <th>
+                <label>País</label>
+            </th>
+            <th>
+                <label>Turno</label>
+            </th>
+            <th>
+                <label>Nombre</label>
+            </th>
+            <th>
+                <label>Apellido</label>
+            </th>
+            <th>
+                <label>Fecha de ingreso</label>
+            </th>
+            <th>
+                <label>Valor de la hora</label>
+            </th>
+            <th></th>
+        </tr>
 
-            <td>
-                @switch (employee.Shift)
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(e => employee.Country)
+                </td>
+
+                <td>
+                    @switch (employee.Shift)
                 {
                     case Services.Dtos.EmployeeDto.Shifts.FirstShift:
-                        <span>Mañana</span>
-                        break;
-                    case Services.Dtos.EmployeeDto.Shifts.SecondShift:
-                        <span>Tarde</span>
-                        break;
-                    case Services.Dtos.EmployeeDto.Shifts.ThirdShift:
-                        <span>Noche</span>
-                        break;
-                }
-            </td>
+                            <span>Mañana</span>
+                            break;
+                        case Services.Dtos.EmployeeDto.Shifts.SecondShift:
+                            <span>Tarde</span>
+                            break;
+                        case Services.Dtos.EmployeeDto.Shifts.ThirdShift:
+                            <span>Noche</span>
+                            break;
+                    }
+                </td>
 
-            <td>
-                @Html.DisplayFor(e => employee.FirstName)
-            </td>
+                <td>
+                    @Html.DisplayFor(e => employee.FirstName)
+                </td>
 
-            <td>
-                @Html.DisplayFor(e => employee.LastName)
-            </td>
+                <td>
+                    @Html.DisplayFor(e => employee.LastName)
+                </td>
 
-            <td>
-                @if (employee.HiringDate != null)
+                <td>
+                    @if (employee.HiringDate != null)
                 {
                     var hiringDate = (DateTime)employee.HiringDate;
-                    <span>@hiringDate.ToString("dd/MM/yyyy")</span>
-                }
-                else
-                {
-                    @Html.Display("")
-                }
-            </td>
+                        <span>@hiringDate.ToString("dd/MM/yyyy")</span>
+                    }
+                    else
+                    {
+                        @Html.Display("")
+                    }
+                </td>
 
-            <td>
-                @Html.DisplayFor(e => employee.HourlyWage)
-            </td>
+                <td>
+                    @Html.DisplayFor(e => employee.HourlyWage)
+                </td>
 
-            <td>
-                @Html.ActionLink("Ver salarios", "Index", "Salary", new { id = employee.EmployeeID }, null) |
-                @Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) |
-                @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })
-            </td>
-        </tr>
-    }
+                <td>
+                    @Html.ActionLink("Ver salarios", "Index", "Salary", new { id = employee.EmployeeID }, null) |
+                    @Html.ActionLink("Editar", "Edit", new { id = employee.EmployeeID }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = employee.EmployeeID })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
