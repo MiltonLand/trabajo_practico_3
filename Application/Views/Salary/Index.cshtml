@@ -10,20 +10,21 @@
                          "Septiembre","Octubre", "Noviembre", "Diciembre" };
 }
 
-<h2>@Model.FirstName @Model.LastName</h2>
+<div class="jumbotron">
+    <h2>@Model.FirstName @Model.LastName</h2>
 
-<br />
+    <br />
 
-<h4>Elegir mes y año</h4>
+    <h4>Elegir mes y año</h4>
 
-<form action="/salary/calculate" method="post" class="validate-form">
-    @Html.AntiForgeryToken()
+    <hr />
 
-    <input hidden name="id" value="@Model.EmployeeID"/>
+    <form action="/salary/calculate" method="post" class="validate-form">
+        @Html.AntiForgeryToken()
 
-    <div class="jumbotron">
+        <input hidden name="id" value="@Model.EmployeeID" />
+
         <div class="form-horizontal">
-            <hr />
 
             <div class="form-group">
                 <label class="control-label col-md-2">Año</label>
@@ -69,6 +70,8 @@
                 </div>
             </div>
 
+            <br />
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <a href="/employees/index" class="btn cancel btn-side-margin btn-glow">Cancelar</a>
@@ -76,8 +79,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 
 <script>
 
